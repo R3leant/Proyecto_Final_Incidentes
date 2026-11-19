@@ -377,22 +377,90 @@
 
 % ============================ 1 =====================================
 \chapter{Introducción y justificación}
+
 \section{Contexto de la organización}
-\guia{Presenta la empresa (ficticia): sector, tamaño, plantilla, facturación, estacionalidad de la actividad, situación actual de su informática y datos personales que trata. Resume sus datos principales en una tabla.}
+
+Oleosierra, S.~Coop.~And.\ es una cooperativa oleícola \emph{ficticia}, creada para este trabajo, con sede en la comarca de Sierra Mágina (Jaén). Fundada en 1987, agrupa a unos 1.200 socios olivareros, que entregan su aceituna en la almazara de la cooperativa. Allí se molturan entre 18 y 22 millones de kilos de aceituna por campaña, de los que se obtiene aceite de oliva virgen extra que se vende a granel a grandes envasadoras y, desde 2021, también envasado con marca propia a través de una tienda en línea.
+
+La actividad es muy estacional. La campaña de recolección, de noviembre a febrero, concentra la recepción de aceituna, el pesaje en báscula, la molturación y la mayor parte de las liquidaciones a los socios. En esos meses, la plantilla pasa de 38 trabajadores fijos a cerca de 90 personas con la incorporación de personal de campaña. Una parada de pocos días en plena campaña tendría consecuencias económicas graves, porque la aceituna no puede almacenarse sin perder calidad. La Tabla~\ref{tab:empresa} resume sus datos principales.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Datos principales de Oleosierra (empresa ficticia)}
+  \label{tab:empresa}
+  \estilotabla
+  \begin{tabularx}{\linewidth}{K Y}
+    \reglasup
+    \rowcolor{cabecera}
+    \cab{Concepto} & \cab{Dato} \\
+    \rowcolor{filaalterna}
+    \textbf{Forma jurídica} & Sociedad cooperativa andaluza \\
+    \textbf{Socios} & 1.200 olivareros \\
+    \rowcolor{filaalterna}
+    \textbf{Plantilla} & 38 fijos; hasta 90 en campaña \\
+    \textbf{Facturación anual} & 14 millones de euros \\
+    \rowcolor{filaalterna}
+    \textbf{Sedes} & Almazara y oficinas en un mismo recinto \\
+    \textbf{Canales de venta} & Granel a envasadoras y tienda en línea \\
+    \reglainf
+  \end{tabularx}
+\end{table}
+
+La informática de la cooperativa ha crecido sin planificación. Un único servidor con Windows Server hace de controlador de dominio y de servidor de ficheros, y aloja el programa de gestión de entradas de aceituna y las carpetas con las liquidaciones de los socios. Unos 25 puestos de trabajo con Windows dan servicio a administración, contabilidad, laboratorio de calidad y báscula. El correo electrónico está contratado en la nube y la tienda en línea, alojada en un proveedor externo. Las copias de seguridad se guardan en un NAS conectado a la misma red. El sistema de control de la almazara, de su fabricante, comparte esa red plana con las oficinas, y la gestoría accede por escritorio remoto para preparar las nóminas.
+
+No existe un departamento de seguridad. Un único técnico informático, que también atiende las incidencias diarias, se apoya en un proveedor externo para las tareas complejas. No hay ningún sistema que vigile lo que ocurre en la red ni un procedimiento escrito para actuar ante un incidente.
+
+La cooperativa trata, además, una cantidad importante de datos personales: datos identificativos y bancarios de los socios y de los kilos que entrega cada uno, nóminas y datos de la plantilla (incluido el personal de campaña) y datos de los clientes de la tienda en línea.
 
 \section{Problema y motivación}
-\guia{Explica por qué la empresa necesita un SOC: amenazas del sector (ransomware y phishing, según ENISA), incidentes previos o cercanos, por qué se elige la propuesta F1, por qué Wazuh y por qué un modelo de lenguaje local para reducir la fatiga de alertas.}
+
+Las pymes del sector agroalimentario son un objetivo cada vez más frecuente. Disponen de liquidez y tienen poca tolerancia a las paradas, pero su madurez en ciberseguridad suele ser baja. El panorama de amenazas de ENISA sitúa el ransomware y el phishing entre las amenazas más relevantes para las organizaciones europeas (European Union Agency for Cybersecurity [ENISA], 2025), y ambos encajan con las debilidades de Oleosierra: una red plana, un acceso remoto expuesto, copias de seguridad alcanzables desde la red y personal sin formación específica.
+
+En la última campaña, la cooperativa sufrió dos avisos. La administración recibió un correo que suplantaba a un proveedor de envases y pedía cambiar la cuenta bancaria para el pago de una factura; el fraude se detectó por casualidad, al llamar al proveedor. Semanas después, otra cooperativa de la comarca tuvo que parar su almazara durante varios días por un ataque de ransomware. A raíz de ambos hechos, el consejo rector solicitó una propuesta para mejorar su capacidad de detectar y responder a incidentes.
+
+Se ha elegido la propuesta F1 porque es la que mejor responde a esta necesidad. Un Centro de Operaciones de Seguridad (SOC) permite ver lo que ocurre en la red, detectar ataques en sus primeras fases y actuar con procedimientos definidos, todo ello con el respaldo de un plan de concienciación, un procedimiento de notificación y una estimación de costes que la dirección pueda valorar.
+
+Una cooperativa de este tamaño no puede asumir el coste de un SIEM comercial ni de un SOC externo. Por eso la propuesta se basa en Wazuh, una plataforma de código abierto que reúne en un solo producto la recogida de eventos, la detección basada en reglas, la monitorización de integridad de ficheros, la evaluación de la configuración, la detección de vulnerabilidades y la respuesta activa.
+
+Detectar no es suficiente: también hay que interpretar. Un SIEM genera un volumen de alertas que provoca la llamada \emph{fatiga de alertas}, porque un único técnico no tiene tiempo de estudiarlas todas. Por eso la propuesta incorpora un modelo de lenguaje que resume y prioriza las alertas, explica qué hace un comando sospechoso y propone acciones. El modelo se ejecuta \emph{en local} con Ollama, en un servidor de la propia cooperativa, para que los registros, que contienen datos personales, no salgan de la empresa. La IA solo recomienda y la decisión final siempre corresponde a una persona.
 
 \section{Objetivos}
-\guia{Objetivo general del proyecto y objetivos específicos numerados (OE1, OE2...), medibles y alineados con el desarrollo técnico.}
+
+\textbf{Objetivo general.} Diseñar, implantar en un laboratorio y validar un Centro de Operaciones de Seguridad para Oleosierra basado en Wazuh y asistido por un modelo de lenguaje local para el análisis de alertas, sobre una infraestructura virtualizada en Proxmox VE y segmentada con OPNsense y Suricata, presentado como propuesta técnica a la dirección de la cooperativa.
+
+\textbf{Objetivos específicos:}
+\begin{enumerate}[label=\textcolor{acento}{\ttfamily\small\bfseries OE\arabic*}, leftmargin=3.2em]
+  \item Analizar los riesgos y la superficie de ataque de la cooperativa e identificar los tres incidentes más probables.
+  \item Desplegar la infraestructura virtual del laboratorio en Proxmox VE, con la red segmentada en cuatro VLAN.
+  \item Configurar OPNsense como cortafuegos perimetral e inter-VLAN con una política de mínimo privilegio, y Suricata como sistema de detección de intrusiones (y después de prevención) con las reglas ET Open.
+  \item Desplegar Wazuh en un nodo único sobre Docker y centralizar en él los eventos de los agentes de Windows y Linux, la telemetría de Sysmon y los registros de OPNsense y Suricata.
+  \item Integrar VirusTotal con la monitorización de integridad de ficheros para detectar ficheros maliciosos y eliminarlos mediante respuesta activa.
+  \item Desarrollar una integración entre Wazuh y un modelo de lenguaje local (Ollama) que enriquezca las alertas, y evaluar si reduce el trabajo de triaje sin dejar ataques sin detectar.
+  \item Validar la solución con siete escenarios de ataque controlados asociados a MITRE ATT\&CK y ajustar las reglas de detección.
+  \item Elaborar los playbooks de respuesta, el plan de concienciación y el procedimiento de notificación a las autoridades.
+  \item Estimar el coste de implantación y de operación del SOC.
+\end{enumerate}
 
 \section{Alcance y limitaciones}
-\guia{Describe qué incluye el trabajo (laboratorio en Proxmox VE, máquinas y VLAN) y qué queda fuera del alcance. Indica las condiciones éticas y legales de las pruebas.}
+
+El trabajo comprende el diseño completo del SOC y su validación en un laboratorio. El laboratorio, montado en un único servidor con Proxmox VE, reproduce de forma simplificada la red de la cooperativa con siete máquinas virtuales repartidas en cuatro VLAN: el cortafuegos OPNsense con Suricata; el SIEM y el servidor de IA en la red del SOC; un puesto con Windows~11 y un servidor con Windows Server 2022, que representan los equipos de oficina y el servidor central de la cooperativa; un servidor Linux con servicios web y SSH; y una máquina Kali Linux aislada que simula a un adversario externo. El manual de implantación paso a paso se entrega como documento independiente.
+
+Quedan fuera del alcance:
+\begin{itemize}
+  \item el despliegue en producción en una empresa real y la alta disponibilidad o el clúster de Wazuh;
+  \item la respuesta automática decidida por la IA (el modelo solo sugiere) y el entrenamiento o ajuste fino (\emph{fine-tuning}) del modelo;
+  \item el uso de malware real: solo se emplean ficheros de prueba (EICAR) y técnicas simuladas;
+  \item el análisis forense profundo de memoria o disco;
+  \item la monitorización del sistema de control industrial de la almazara, que se propone como línea futura;
+  \item la vigilancia de los servicios en la nube (correo y tienda en línea).
+\end{itemize}
+
+Todas las pruebas ofensivas se realizan exclusivamente en el laboratorio, aislado de otras redes mediante OPNsense, y sobre sistemas bajo control del alumno. A VirusTotal solo se envían los hashes de los ficheros, no su contenido, y los registros que analiza la IA no salen del laboratorio. Tanto la empresa como sus datos son ficticios. Por tanto, los resultados demuestran la viabilidad de la propuesta, pero deberían confirmarse en un entorno real antes de su implantación definitiva.
 
 % ============================ 2 =====================================
 \chapter{Desarrollo técnico}
 
-\guia{Introduce brevemente el capítulo: análisis de riesgos, arquitectura, implantación, validación, procedimientos organizativos y costes.}
+Este capítulo recoge la propuesta técnica para Oleosierra. Parte del análisis de riesgos, define la arquitectura de monitorización, describe su implantación y validación en el laboratorio y la completa con los procedimientos organizativos (playbooks, concienciación y notificación) y con la estimación de costes.
 
 \section{Análisis de riesgos y superficie de ataque}
 \subsection{Inventario de activos}
@@ -408,19 +476,210 @@
 % ---------------------------------------------------------------------
 \section{Arquitectura de monitorización}
 \subsection{Visión general}
-\guia{Describe la arquitectura general de la solución e incluye un diagrama con el host, el cortafuegos, las VLAN, las máquinas y los flujos principales.}
+
+La solución se despliega en un único servidor físico con Proxmox VE (Figura~\ref{fig:arquitectura}). OPNsense actúa como única puerta de enlace: separa la red del laboratorio de la red exterior (WAN) y enruta y filtra el tráfico entre cuatro VLAN, que viajan por un \emph{bridge} con soporte de VLAN. Suricata inspecciona el tráfico de las interfaces internas, y todos los eventos (los de los agentes instalados en los equipos y los del propio cortafuegos) convergen en Wazuh. Wazuh consulta la reputación de los ficheros sospechosos en VirusTotal y envía las alertas relevantes al modelo de lenguaje local, cuyo análisis vuelve al panel para que el analista decida.
+
+\begin{figure}[htbp]
+\centering
+% El diagrama se coloca con posiciones relativas (cada caja se sitúa respecto a la anterior
+% y las zonas se ajustan a su contenido) y se escala al ancho de la página: así no se
+% solapa aunque cambie la fuente.
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[
+    font=\sffamily\scriptsize,
+    equipo/.style={draw=tinta!70, line width=0.7pt, fill=fondo, rounded corners=2pt,
+                   text width=3.2cm, minimum height=1.35cm, align=center, inner sep=3pt},
+    externo/.style={draw=suave, dashed, line width=0.7pt, fill=fondo, rounded corners=2pt,
+                    text width=3.6cm, minimum height=0.9cm, align=center, inner sep=3pt},
+    zona/.style={draw=borde, line width=0.6pt, fill=zona, rounded corners=4pt, inner sep=7pt},
+    rotulo/.style={font=\sffamily\scriptsize\bfseries, text=acento, align=center,
+                   text width=3.2cm, inner sep=1pt},
+    enlace/.style={draw=tinta, line width=0.6pt},
+    flujo/.style={draw=acento, line width=0.8pt, dashed, -{Stealth[length=2.2mm]}},
+    nota/.style={font=\ttfamily\tiny, text=acento, inner sep=2pt}
+  ]
+  % ---- Columnas de las VLAN (separadas 4,3 cm) ----
+  \node[rotulo] (r10) at (0,0)    {VLAN 10 · SOC\\[1pt]{\ttfamily\mdseries\tiny 10.10.10.0/24}};
+  \node[rotulo] (r20) at (4.3,0)  {VLAN 20 · Endpoints\\[1pt]{\ttfamily\mdseries\tiny 10.10.20.0/24}};
+  \node[rotulo] (r30) at (8.6,0)  {VLAN 30 · Servidores\\[1pt]{\ttfamily\mdseries\tiny 10.10.30.0/24}};
+  \node[rotulo] (r99) at (12.9,0) {VLAN 99 · Atacante\\[1pt]{\ttfamily\mdseries\tiny 10.10.99.0/24 · aislada}};
+
+  % ---- Equipos (cada uno debajo de su rótulo o del equipo anterior) ----
+  \node[equipo, below=4mm of r10]    (wazuh)  {\textbf{wazuh-aio} · .10\\[1pt]Wazuh 4.14 (Docker)\\[1pt]{\tiny manager · indexer · panel}};
+  \node[equipo, below=8mm of wazuh]  (ollama) {\textbf{ollama} · .20\\[1pt]Ollama + LLM 7--8B\\[1pt]{\tiny API REST :11434}};
+  \node[equipo, below=4mm of r20]    (win11)  {\textbf{win11} · .11\\[1pt]Windows 11 Pro\\[1pt]{\tiny Sysmon · FIM $\rightarrow$ VirusTotal}};
+  \node[equipo, below=8mm of win11]  (winsrv) {\textbf{winsrv} · .12\\[1pt]Windows Server 2022\\[1pt]{\tiny Sysmon · eventos 4625}};
+  \node[equipo, below=4mm of r30]    (web)    {\textbf{ubuntu-web} · .10\\[1pt]Ubuntu Server 24.04\\[1pt]{\tiny web + SSH · respuesta activa}};
+  \node[equipo, below=4mm of r99]    (kali)   {\textbf{kali} · .10\\[1pt]Kali Linux\\[1pt]{\tiny nmap · hydra}};
+
+  % ---- Zonas: se ajustan automáticamente a su contenido ----
+  \begin{scope}[on background layer]
+    \node[zona, fit=(r10)(wazuh)(ollama)] (z10) {};
+    \node[zona, fit=(r20)(win11)(winsrv)] (z20) {};
+    \node[zona, fit=(r30)(web)]           (z30) {};
+    \node[zona, fit=(r99)(kali)]          (z99) {};
+  \end{scope}
+
+  \draw[flujo, {Stealth[length=2.2mm]}-{Stealth[length=2.2mm]}] (wazuh) -- node[nota, right, xshift=2pt] {análisis} (ollama);
+  \draw[draw=acento, line width=0.8pt, -{Stealth[length=2.2mm]}] (kali.west) -- (web.east);
+
+  % ---- Troncal 802.1Q ----
+  \coordinate (tr) at (0,1.45);
+  \draw[tinta, line width=2pt] ($(z10.north west |- tr)+(0.3,0)$) -- ($(z99.north east |- tr)+(-0.3,0)$);
+  \foreach \z in {z10,z20,z30,z99} \draw[enlace] (\z.north) -- (\z.north |- tr);
+  \node[nota, anchor=south east] at ($(z99.north east |- tr)+(-0.3,0)$) {vmbr1 · trunk 802.1Q (VLAN 10/20/30/99)};
+
+  % ---- Cortafuegos ----
+  \node[equipo, fill=acento, text=white, text width=4.8cm, minimum height=1.0cm] (fw) at (6.45,2.75)
+    {\textbf{OPNsense 26.x + Suricata}\\[1pt]{\tiny Cortafuegos · IDS/IPS · ET Open}};
+  \draw[enlace] (fw.south) -- (fw.south |- tr);
+
+  % ---- Exterior ----
+  \node[externo] (inet) at (6.45,4.75) {Internet / red del centro\\[1pt]{\tiny WAN · vmbr0}};
+  \node[externo] (vt)   at (12.1,4.75) {\textbf{VirusTotal API v3}\\[1pt]{\tiny reputación de hashes}};
+  \draw[enlace] (inet) -- (fw);
+  \draw[flujo] (fw.east) -| node[nota, pos=0, anchor=south west, xshift=3pt] {hashes · 443/TCP} (vt.south);
+
+  % ---- Leyenda de flujos (debajo de las VLAN 30 y 99) ----
+  \node[draw=borde, fill=fondo, rounded corners=2pt, anchor=north, text width=7.9cm,
+        align=left, font=\sffamily\tiny, inner sep=5pt] (leyenda)
+        at ($(z30.south)!0.5!(z99.south)+(0,-0.4)$)
+    {\textbf{\color{acento}Flujos principales (controlados por OPNsense)}\\[3pt]
+     Agentes $\rightarrow$ wazuh-aio: 1514/TCP (eventos) y 1515/TCP (registro)\\[1pt]
+     OPNsense y Suricata $\rightarrow$ wazuh-aio: syslog 514/UDP\\[1pt]
+     wazuh-aio $\rightarrow$ ollama: 11434/TCP (solo desde 10.10.10.10)\\[1pt]
+     wazuh-aio $\rightarrow$ VirusTotal: 443/TCP (solo hashes)\\[1pt]
+     Kali $\rightarrow$ VLAN 20 y 30: tráfico de ataque inspeccionado por Suricata};
+
+  % ---- Host Proxmox: rodea todo lo que se ejecuta en el servidor ----
+  \begin{scope}[on background layer]
+    \node[draw=suave, line width=0.8pt, rounded corners=5pt, inner sep=10pt,
+          fit=(fw)(z10)(z20)(z30)(z99)(leyenda)] (host) {};
+  \end{scope}
+  \node[anchor=north west, font=\sffamily\scriptsize\bfseries, inner sep=6pt] at (host.north west)
+    {Host físico · Proxmox VE 9.x};
+\end{tikzpicture}}
+\caption{Arquitectura lógica del laboratorio y flujos principales}
+\label{fig:arquitectura}
+\end{figure}
+
 \subsection{Segmentación de la red}
-\guia{Presenta las VLAN del laboratorio y su equivalencia en la cooperativa, y la política de filtrado entre VLAN (denegación por defecto).}
+
+Cada VLAN representa una zona de la red de la cooperativa (Tabla~\ref{tab:vlan}). En una implantación real, esta segmentación sustituiría a la red plana actual de Oleosierra y separaría también el sistema de control de la almazara en una VLAN propia, que queda fuera del alcance del laboratorio.
+
+\begin{table}[H]
+  \centering
+  \caption{VLAN del laboratorio y su equivalencia en la cooperativa}
+  \label{tab:vlan}
+  \small
+  \estilotabla
+  \begin{tabularx}{\linewidth}{P{0.75} P{0.85} P{1.4}}
+    \reglasup
+    \rowcolor{cabecera}
+    \cab{VLAN} & \cab{Red} & \cab{Equipos y función} \\
+    \rowcolor{filaalterna}
+    \textbf{10 · SOC} & 10.10.10.0/24 & SIEM (wazuh-aio) y servidor de IA (ollama) \\
+    \textbf{20 · Endpoints Windows} & 10.10.20.0/24 & Puesto de usuario y servidor Windows: red de oficina \\
+    \rowcolor{filaalterna}
+    \textbf{30 · Servidores} & 10.10.30.0/24 & Servidor Linux con servicios web y SSH \\
+    \textbf{99 · Atacante} & 10.10.99.0/24 & Kali Linux, aislada del SOC \\
+    \reglainf
+  \end{tabularx}
+\end{table}
+
+OPNsense aplica una política de \textbf{denegación por defecto}: solo se permiten los flujos imprescindibles y se registra todo lo demás (Tabla~\ref{tab:politica}). La red del SOC es la más protegida: el modelo de lenguaje solo es accesible desde el SIEM, y la máquina atacante no puede alcanzar ningún equipo de monitorización.
+
+\begin{table}[H]
+  \centering
+  \caption{Política de filtrado entre VLAN en OPNsense}
+  \label{tab:politica}
+  \footnotesize
+  \estilotabla[1.5]
+  \begin{tabularx}{\linewidth}{P{1.05} P{0.85} P{0.95} P{0.75} P{1.4}}
+    \reglasup
+    \rowcolor{cabecera}
+    \cab{Origen} & \cab{Destino} & \cab{Puerto / servicio} & \cab{Acción} & \cab{Justificación} \\
+    \rowcolor{filaalterna}
+    VLAN 20 y 30 (agentes) & wazuh-aio & 1514 y 1515/TCP & Permitir & Envío de eventos y registro de agentes \\
+    OPNsense & wazuh-aio & 514/UDP (syslog) & Permitir & Registros del cortafuegos y alertas de Suricata \\
+    \rowcolor{filaalterna}
+    Equipo de administración (VLAN 10) & wazuh-aio & 443/TCP & Permitir & Acceso al panel de Wazuh \\
+    wazuh-aio & ollama & 11434/TCP & Permitir & API del modelo; inaccesible desde otras VLAN \\
+    \rowcolor{filaalterna}
+    wazuh-aio & Internet (VirusTotal) & 443/TCP & Permitir & Consulta de hashes y actualizaciones \\
+    VLAN 99 (Kali) & VLAN 20 y 30 & Servicios expuestos & Permitir (solo en pruebas) & Escenarios de ataque inspeccionados por Suricata \\
+    \rowcolor{filaalterna}
+    VLAN 99 (Kali) & VLAN 10 (SOC) & Cualquiera & Denegar & Proteger la infraestructura de monitorización \\
+    Cualquier VLAN & Cualquier destino & Resto & Denegar y registrar & Mínimo privilegio y trazabilidad \\
+    \reglainf
+  \end{tabularx}
+\end{table}
+
 \subsection{Componentes tecnológicos}
-\guia{Tabla con los componentes, su versión y su función en el proyecto.}
+
+Todos los componentes son gratuitos o de código abierto, lo que elimina el coste de licencias, uno de los principales frenos para que una pyme disponga de un SOC. La Tabla~\ref{tab:componentes} recoge la función de cada uno.
+
+\begin{table}[H]
+  \centering
+  \caption{Componentes tecnológicos del SOC}
+  \label{tab:componentes}
+  \footnotesize
+  \estilotabla[1.5]
+  \begin{tabularx}{\linewidth}{P{0.7} P{0.8} P{1.5}}
+    \reglasup
+    \rowcolor{cabecera}
+    \cab{Componente} & \cab{Versión} & \cab{Función en el proyecto} \\
+    \rowcolor{filaalterna}
+    \textbf{Proxmox VE} & 9.x & Hipervisor de tipo 1, con bridges con soporte de VLAN y snapshots para restaurar el laboratorio antes de cada escenario \\
+    \textbf{OPNsense} & 26.x (rama estable) & Cortafuegos, enrutamiento entre VLAN, DHCP y DNS; envía sus registros a Wazuh por syslog \\
+    \rowcolor{filaalterna}
+    \textbf{Suricata} & Integrado en OPNsense & Detección de intrusiones en red con reglas ET Open: primero como IDS y después como IPS \\
+    \textbf{Wazuh} & 4.14.x (Docker, nodo único) & SIEM/XDR: decodificadores y reglas, FIM, evaluación de configuración, detección de vulnerabilidades, MITRE ATT\&CK y respuesta activa \\
+    \rowcolor{filaalterna}
+    \textbf{Docker Engine y Compose} & Versión estable & Despliegue reproducible del manager, el indexer y el dashboard con volúmenes persistentes \\
+    \textbf{Sysmon} & Versión vigente & Telemetría avanzada de Windows: procesos, conexiones de red, registro y acceso a procesos sensibles \\
+    \rowcolor{filaalterna}
+    \textbf{VirusTotal API v3} & API pública & Reputación de los hashes de los ficheros detectados por la monitorización de integridad \\
+    \textbf{Ollama y LLM} & Modelo de 7--8B cuantizado & Análisis y explicación de alertas en local mediante su API REST \\
+    \rowcolor{filaalterna}
+    \textbf{Kali Linux y Atomic Red Team} & Versiones vigentes & Generación controlada de actividad maliciosa alineada con MITRE ATT\&CK \\
+    \reglainf
+  \end{tabularx}
+\end{table}
+
 \subsection{SIEM: Wazuh}
-\guia{Qué es un SIEM, por qué se elige Wazuh frente a otras opciones, cómo se despliega y qué fuentes de eventos recibe.}
+
+Un SIEM (\emph{Security Information and Event Management}) centraliza los registros de los equipos y servicios, los normaliza y los correlaciona mediante reglas para generar alertas. Se ha elegido Wazuh porque es de código abierto y reúne en una sola plataforma la detección basada en reglas con su técnica de MITRE ATT\&CK asociada, la monitorización de integridad de ficheros (FIM), la evaluación de la configuración (SCA), la detección de vulnerabilidades y la respuesta activa. Splunk se licencia según el volumen de datos y Elastic Security reserva parte de sus funciones a las suscripciones de pago, mientras que Wazuh ofrece todas sus capacidades sin coste de licencias.
+
+Wazuh se despliega en un único nodo sobre Docker Compose, con sus tres componentes en contenedores: \textbf{wazuh.manager}, que recibe y analiza los eventos; \textbf{wazuh.indexer}, que los almacena e indexa; y \textbf{wazuh.dashboard}, la interfaz web, accesible por HTTPS. Los volúmenes persistentes conservan la configuración y los datos al recrear los contenedores, y certificados propios cifran las comunicaciones entre componentes.
+
+Las fuentes de eventos son:
+\begin{itemize}
+  \item \textbf{Agentes de Windows} (win11 y winsrv): registros de seguridad, como los inicios de sesión fallidos (evento 4625), y la telemetría de Sysmon.
+  \item \textbf{Agente de Linux} (ubuntu-web): registros del sistema y de autenticación (\texttt{sshd}).
+  \item \textbf{OPNsense y Suricata}: registros del cortafuegos y alertas del IDS, recibidos por syslog.
+  \item \textbf{VirusTotal}: resultado de la consulta de reputación de los ficheros nuevos o modificados.
+\end{itemize}
+
 \subsection{Telemetría de endpoints: Sysmon}
-\guia{Qué aporta Sysmon frente a los registros nativos de Windows, eventos utilizados y configuración de partida.}
+
+Los registros nativos de Windows no recogen con detalle lo que ejecuta un atacante. Sysmon, de Microsoft Sysinternals, añade eventos de creación de procesos con su línea de comandos (evento~1), conexiones de red (evento~3), acceso a la memoria de otros procesos, como LSASS (evento~10), y modificaciones del registro (evento~13). Se parte de una configuración comunitaria contrastada (SwiftOnSecurity o sysmon-modular), que filtra el ruido habitual del sistema y conserva los eventos útiles para la detección.
+
 \subsection{Detección de intrusiones: Suricata}
-\guia{Interfaces que inspecciona, conjunto de reglas ET Open y paso de IDS a IPS.}
+
+Suricata, integrado en OPNsense, inspecciona el tráfico de las interfaces internas, es decir, el que circula entre las VLAN. Utiliza el conjunto de reglas \textbf{ET Open} de Emerging Threats, que detecta escaneos, ataques a servicios, tráfico de malware conocido y comunicaciones con infraestructuras maliciosas, y se actualiza de forma programada desde el propio cortafuegos. Sus alertas llegan a Wazuh por syslog.
+
+Suricata se activa primero en modo \textbf{IDS}, que solo alerta, para identificar y ajustar las reglas que generan falsos positivos. Una vez ajustadas, pasa a modo \textbf{IPS}, en el que bloquea en línea el tráfico malicioso. Así se evita que el sistema de prevención corte tráfico legítimo, algo especialmente grave en plena campaña.
+
 \subsection{Inteligencia de amenazas}
-\guia{Fuentes de inteligencia de amenazas (ET Open y VirusTotal) y limitaciones de la API pública de VirusTotal.}
+
+La propuesta combina dos fuentes de inteligencia de amenazas:
+\begin{itemize}
+  \item \textbf{ET Open}, en la red: las firmas de Suricata incorporan indicadores de amenazas conocidas.
+  \item \textbf{VirusTotal}, en los equipos: cuando la monitorización de integridad detecta un fichero nuevo o modificado en un directorio de riesgo, Wazuh envía su hash a VirusTotal. Si varios motores antivirus lo identifican como malicioso, se genera una alerta y la respuesta activa elimina el fichero.
+\end{itemize}
+
+La API pública de VirusTotal limita las consultas a 4 por minuto y 500 al día, por lo que solo se monitorizan los directorios de mayor riesgo (Descargas y carpetas temporales). Además, sus condiciones de uso no permiten emplearla en servicios comerciales, de modo que en la implantación real en la cooperativa habría que contratar la API de pago o sustituirla por una fuente gratuita que lo permita. Esta decisión se tiene en cuenta en la estimación de costes.
 
 % ---------------------------------------------------------------------
 \section{Implantación en laboratorio}
@@ -521,7 +780,18 @@
 % ============================ 5 =====================================
 \chapter{Referencias bibliográficas}
 
-\guia{Fuentes citadas en formato APA 7.ª edición, en orden alfabético.}
+\begin{list}{}{\leftmargin=1.27cm \itemindent=-1.27cm \itemsep=6pt}
+  \item European Union Agency for Cybersecurity. (2025). \textit{ENISA threat landscape 2025}. \url{https://www.enisa.europa.eu/publications/enisa-threat-landscape-2025}
+  \item Microsoft. (s.~f.). \textit{Sysmon}. Microsoft Learn. \url{https://learn.microsoft.com/es-es/sysinternals/downloads/sysmon}
+  \item MITRE Corporation. (s.~f.). \textit{MITRE ATT\&CK}. \url{https://attack.mitre.org}
+  \item OPNsense. (s.~f.). \textit{OPNsense documentation: Intrusion prevention system}. \url{https://docs.opnsense.org}
+  \item Proofpoint. (s.~f.). \textit{Emerging Threats Open ruleset}. \url{https://rules.emergingthreats.net}
+  \item Proxmox Server Solutions. (s.~f.). \textit{Proxmox VE administration guide}. \url{https://pve.proxmox.com/pve-docs/}
+  \item VirusTotal. (s.~f.). \textit{VirusTotal API v3 reference}. \url{https://docs.virustotal.com}
+  \item Wazuh. (s.~f.). \textit{Wazuh documentation: Deployment on Docker, VirusTotal integration and Sysmon monitoring}. \url{https://documentation.wazuh.com/current/}
+\end{list}
+
+\guia{Añade las fuentes adicionales que cites al completar el capítulo 2, en formato APA 7.ª edición y manteniendo el orden alfabético.}
 
 % ============================ ANEXOS ================================
 \appendix

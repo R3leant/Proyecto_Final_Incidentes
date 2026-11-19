@@ -1,65 +1,65 @@
 \babel@toc {spanish}{}\relax 
 \contentsline {chapter}{\numberline {1}Introducción y justificación}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Contexto de la organización}{1}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Problema y motivación}{1}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Objetivos}{1}{section.1.3}%
-\contentsline {section}{\numberline {1.4}Alcance y limitaciones}{1}{section.1.4}%
-\contentsline {chapter}{\numberline {2}Desarrollo técnico}{2}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Análisis de riesgos y superficie de ataque}{2}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}Inventario de activos}{2}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}Superficie de ataque}{2}{subsection.2.1.2}%
-\contentsline {subsection}{\numberline {2.1.3}Matriz de riesgos}{2}{subsection.2.1.3}%
-\contentsline {subsection}{\numberline {2.1.4}Incidentes más probables}{3}{subsection.2.1.4}%
-\contentsline {section}{\numberline {2.2}Arquitectura de monitorización}{3}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Visión general}{3}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Segmentación de la red}{3}{subsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.2.3}Componentes tecnológicos}{3}{subsection.2.2.3}%
-\contentsline {subsection}{\numberline {2.2.4}SIEM: Wazuh}{3}{subsection.2.2.4}%
-\contentsline {subsection}{\numberline {2.2.5}Telemetría de endpoints: Sysmon}{3}{subsection.2.2.5}%
-\contentsline {subsection}{\numberline {2.2.6}Detección de intrusiones: Suricata}{3}{subsection.2.2.6}%
-\contentsline {subsection}{\numberline {2.2.7}Inteligencia de amenazas}{3}{subsection.2.2.7}%
-\contentsline {section}{\numberline {2.3}Implantación en laboratorio}{4}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Metodología}{4}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Máquinas virtuales y direccionamiento}{4}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}Proxmox VE y red virtual}{4}{subsection.2.3.3}%
-\contentsline {subsection}{\numberline {2.3.4}OPNsense y Suricata}{4}{subsection.2.3.4}%
-\contentsline {subsection}{\numberline {2.3.5}Wazuh en Docker}{4}{subsection.2.3.5}%
-\contentsline {subsection}{\numberline {2.3.6}Agentes y fuentes de eventos}{4}{subsection.2.3.6}%
-\contentsline {subsection}{\numberline {2.3.7}VirusTotal, FIM y respuesta activa}{4}{subsection.2.3.7}%
-\contentsline {subsection}{\numberline {2.3.8}Reglas de detección propias}{4}{subsection.2.3.8}%
-\contentsline {section}{\numberline {2.4}Triaje de alertas asistido por IA}{4}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Funcionamiento}{4}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}Decisiones de diseño y salvaguardas}{5}{subsection.2.4.2}%
-\contentsline {subsection}{\numberline {2.4.3}Selección del modelo}{5}{subsection.2.4.3}%
-\contentsline {section}{\numberline {2.5}Validación con escenarios de ataque}{5}{section.2.5}%
-\contentsline {subsection}{\numberline {2.5.1}Escenarios}{5}{subsection.2.5.1}%
-\contentsline {subsection}{\numberline {2.5.2}Resultados}{5}{subsection.2.5.2}%
-\contentsline {section}{\numberline {2.6}Playbooks de respuesta a incidentes}{5}{section.2.6}%
-\contentsline {subsection}{\numberline {2.6.1}Organización de la respuesta}{5}{subsection.2.6.1}%
-\contentsline {subsection}{\numberline {2.6.2}Playbook 1: ransomware}{5}{subsection.2.6.2}%
-\contentsline {subsection}{\numberline {2.6.3}Playbook 2: phishing y fraude por correo}{6}{subsection.2.6.3}%
-\contentsline {subsection}{\numberline {2.6.4}Playbook 3: acceso no autorizado}{6}{subsection.2.6.4}%
-\contentsline {subsection}{\numberline {2.6.5}Simulacro}{7}{subsection.2.6.5}%
-\contentsline {section}{\numberline {2.7}Plan de concienciación}{7}{section.2.7}%
-\contentsline {section}{\numberline {2.8}Procedimiento de notificación a autoridades}{7}{section.2.8}%
-\contentsline {section}{\numberline {2.9}Estimación del coste de implantación}{8}{section.2.9}%
-\contentsline {chapter}{\numberline {3}Marco normativo aplicable}{9}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Protección de datos: RGPD y LOPDGDD}{9}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Directiva NIS2}{9}{section.3.2}%
-\contentsline {section}{\numberline {3.3}ISO/IEC 27001:2022}{9}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Reglamento de Inteligencia Artificial}{9}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Resumen}{9}{section.3.5}%
-\contentsline {chapter}{\numberline {4}Conclusiones}{10}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Resultados obtenidos}{10}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Limitaciones}{10}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Líneas de mejora}{10}{section.4.3}%
-\contentsline {chapter}{Declaración de uso de IA generativa}{11}{chapter*.8}%
-\contentsline {chapter}{\numberline {5}Referencias bibliográficas}{12}{chapter.5}%
-\contentsline {chapter}{\numberline {A}Capturas y evidencias del laboratorio}{13}{appendix.Alph1}%
-\contentsline {chapter}{\numberline {B}Ficheros de configuración}{14}{appendix.Alph2}%
-\contentsline {chapter}{\numberline {C}Informes de los incidentes simulados}{15}{appendix.Alph3}%
-\contentsline {chapter}{\numberline {D}Playbooks en formato visual}{16}{appendix.Alph4}%
-\contentsline {chapter}{\numberline {E}Materiales de concienciación}{17}{appendix.Alph5}%
-\contentsline {chapter}{\numberline {F}Plantillas de notificación}{18}{appendix.Alph6}%
-\contentsline {chapter}{\numberline {G}Relación con los resultados de aprendizaje}{19}{appendix.Alph7}%
+\contentsline {section}{\numberline {1.2}Problema y motivación}{2}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Objetivos}{3}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Alcance y limitaciones}{3}{section.1.4}%
+\contentsline {chapter}{\numberline {2}Desarrollo técnico}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Análisis de riesgos y superficie de ataque}{5}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Inventario de activos}{5}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Superficie de ataque}{5}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Matriz de riesgos}{5}{subsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.1.4}Incidentes más probables}{6}{subsection.2.1.4}%
+\contentsline {section}{\numberline {2.2}Arquitectura de monitorización}{6}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Visión general}{6}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Segmentación de la red}{6}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Componentes tecnológicos}{8}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}SIEM: Wazuh}{9}{subsection.2.2.4}%
+\contentsline {subsection}{\numberline {2.2.5}Telemetría de endpoints: Sysmon}{10}{subsection.2.2.5}%
+\contentsline {subsection}{\numberline {2.2.6}Detección de intrusiones: Suricata}{10}{subsection.2.2.6}%
+\contentsline {subsection}{\numberline {2.2.7}Inteligencia de amenazas}{10}{subsection.2.2.7}%
+\contentsline {section}{\numberline {2.3}Implantación en laboratorio}{11}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Metodología}{11}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Máquinas virtuales y direccionamiento}{11}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Proxmox VE y red virtual}{11}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}OPNsense y Suricata}{11}{subsection.2.3.4}%
+\contentsline {subsection}{\numberline {2.3.5}Wazuh en Docker}{11}{subsection.2.3.5}%
+\contentsline {subsection}{\numberline {2.3.6}Agentes y fuentes de eventos}{11}{subsection.2.3.6}%
+\contentsline {subsection}{\numberline {2.3.7}VirusTotal, FIM y respuesta activa}{11}{subsection.2.3.7}%
+\contentsline {subsection}{\numberline {2.3.8}Reglas de detección propias}{11}{subsection.2.3.8}%
+\contentsline {section}{\numberline {2.4}Triaje de alertas asistido por IA}{11}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Funcionamiento}{11}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Decisiones de diseño y salvaguardas}{12}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}Selección del modelo}{12}{subsection.2.4.3}%
+\contentsline {section}{\numberline {2.5}Validación con escenarios de ataque}{12}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Escenarios}{12}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}Resultados}{12}{subsection.2.5.2}%
+\contentsline {section}{\numberline {2.6}Playbooks de respuesta a incidentes}{12}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}Organización de la respuesta}{12}{subsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.6.2}Playbook 1: ransomware}{12}{subsection.2.6.2}%
+\contentsline {subsection}{\numberline {2.6.3}Playbook 2: phishing y fraude por correo}{13}{subsection.2.6.3}%
+\contentsline {subsection}{\numberline {2.6.4}Playbook 3: acceso no autorizado}{13}{subsection.2.6.4}%
+\contentsline {subsection}{\numberline {2.6.5}Simulacro}{14}{subsection.2.6.5}%
+\contentsline {section}{\numberline {2.7}Plan de concienciación}{14}{section.2.7}%
+\contentsline {section}{\numberline {2.8}Procedimiento de notificación a autoridades}{14}{section.2.8}%
+\contentsline {section}{\numberline {2.9}Estimación del coste de implantación}{15}{section.2.9}%
+\contentsline {chapter}{\numberline {3}Marco normativo aplicable}{16}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Protección de datos: RGPD y LOPDGDD}{16}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Directiva NIS2}{16}{section.3.2}%
+\contentsline {section}{\numberline {3.3}ISO/IEC 27001:2022}{16}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Reglamento de Inteligencia Artificial}{16}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Resumen}{16}{section.3.5}%
+\contentsline {chapter}{\numberline {4}Conclusiones}{17}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Resultados obtenidos}{17}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Limitaciones}{17}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Líneas de mejora}{17}{section.4.3}%
+\contentsline {chapter}{Declaración de uso de IA generativa}{18}{chapter*.13}%
+\contentsline {chapter}{\numberline {5}Referencias bibliográficas}{19}{chapter.5}%
+\contentsline {chapter}{\numberline {A}Capturas y evidencias del laboratorio}{20}{appendix.Alph1}%
+\contentsline {chapter}{\numberline {B}Ficheros de configuración}{21}{appendix.Alph2}%
+\contentsline {chapter}{\numberline {C}Informes de los incidentes simulados}{22}{appendix.Alph3}%
+\contentsline {chapter}{\numberline {D}Playbooks en formato visual}{23}{appendix.Alph4}%
+\contentsline {chapter}{\numberline {E}Materiales de concienciación}{24}{appendix.Alph5}%
+\contentsline {chapter}{\numberline {F}Plantillas de notificación}{25}{appendix.Alph6}%
+\contentsline {chapter}{\numberline {G}Relación con los resultados de aprendizaje}{26}{appendix.Alph7}%
 \contentsfinish 
