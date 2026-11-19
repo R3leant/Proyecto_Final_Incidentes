@@ -1,0 +1,552 @@
+% =====================================================================
+%  MEMORIA · TRABAJO FINAL DE MÓDULO · PROPUESTA F1
+%  Archivo único. Compilar con pdfLaTeX (dos veces para el índice).
+%  Sustituye todo el texto que aparece entre [corchetes].
+%  Diseño basado en la web personal: IBM Plex Sans / IBM Plex Mono,
+%  negro #08080A y azul #E5484D.
+% =====================================================================
+\documentclass[11pt,a4paper,oneside]{report}
+
+% ---------------- Modo de color ----------------
+% \oscurofalse: portada oscura e interior claro (recomendado para imprimir)
+% \oscurotrue : todas las páginas con fondo oscuro, como la web
+\newif\ifoscuro
+\oscurofalse
+
+% ---------------- Idioma y tipografía ----------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla]{babel}
+\addto\captionsspanish{\renewcommand{\tablename}{Tabla}\renewcommand{\contentsname}{Índice}}
+% IBM Plex Sans (texto y títulos) e IBM Plex Mono (etiquetas y números).
+% Vienen con TeX Live completo y Overleaf; si no están, se usan Helvetica y Courier.
+\IfFileExists{plex-sans.sty}
+  {\usepackage[sfdefault]{plex-sans}}
+  {\usepackage[scaled=0.92]{helvet}\renewcommand{\familydefault}{\sfdefault}}
+\IfFileExists{plex-mono.sty}
+  {\usepackage[scale=0.92]{plex-mono}}
+  {\renewcommand{\ttdefault}{pcr}}
+\usepackage{microtype}   % \textls{...}: espaciado entre letras de las etiquetas
+
+% ---------------- Página ----------------
+\usepackage[a4paper,top=2.8cm,bottom=2.6cm,left=2.8cm,right=2.8cm,headheight=18pt,headsep=14pt]{geometry}
+\usepackage{setspace}
+\setstretch{1.18}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt}
+
+% ---------------- Colores ----------------
+\usepackage{xcolor}
+% Paleta de la web (fija, se usa en la portada)
+\definecolor{negro}{HTML}{08080A}       % fondo
+\definecolor{puntos}{HTML}{18181D}      % retícula de puntos
+\definecolor{superficie}{HTML}{101014}  % etiquetas y tarjetas
+\definecolor{lineaweb}{HTML}{1D1D23}    % líneas finas
+\definecolor{bordeweb}{HTML}{2E2E36}    % bordes
+\definecolor{blanco}{HTML}{F2F2F4}      % texto principal
+\definecolor{grisclaro}{HTML}{9B9BA4}   % segunda línea del título
+\definecolor{grismedio}{HTML}{8F8F97}   % texto secundario
+\definecolor{azul}{HTML}{488CE5}        % acento sobre fondo oscuro (textos y líneas)
+\definecolor{azulboton}{HTML}{3C7DD3}   % botones
+\definecolor{azuloscuro}{HTML}{2163BA}  % acento sobre fondo claro (más contraste)
+% Colores de las páginas interiores según el modo
+\ifoscuro
+  \colorlet{fondo}{negro}
+  \definecolor{tinta}{HTML}{E4E4E8}
+  \colorlet{suave}{grisclaro}
+  \colorlet{guia}{grismedio}
+  \colorlet{acento}{azul}
+  \colorlet{borde}{bordeweb}
+  \colorlet{zona}{superficie}
+  \colorlet{filaalterna}{superficie}
+  \colorlet{cabecera}{lineaweb}
+  \colorlet{cabtexto}{blanco}
+\else
+  \colorlet{fondo}{white}
+  \definecolor{tinta}{HTML}{16161A}
+  \definecolor{suave}{HTML}{5E5E64}
+  \definecolor{guia}{HTML}{74747C}
+  \colorlet{acento}{azuloscuro}
+  \definecolor{borde}{HTML}{DCDCE1}
+  \definecolor{zona}{HTML}{F4F4F6}
+  \colorlet{filaalterna}{zona}
+  \colorlet{cabecera}{negro}
+  \colorlet{cabtexto}{white}
+\fi
+\color{tinta}            % color por defecto del texto
+\ifoscuro\pagecolor{fondo}\fi
+
+% Número con dos cifras (01, 02...); las letras de los anexos se dejan igual
+\newcommand{\padnum}[1]{\ifnum0<0#1\relax\ifnum#1<10 0\fi\fi#1}
+% Etiqueta como la de la web: línea azul + texto monoespaciado espaciado
+\newcommand{\etiqueta}[1]{{\color{acento}\rule[0.55ex]{1.1cm}{0.7pt}\hspace{0.35cm}%
+  \ttfamily\small\textls[220]{\MakeUppercase{#1}}}}
+% Esquina en escuadra (la de arriba a la izquierda de la web)
+\newcommand{\esquina}{\hspace*{-0.55cm}\tikz{\draw[acento, line width=0.8pt]
+  (0,0) -- (0,0.42) -- (0.42,0.42);}}
+% Encabezado de capítulo: esquina + etiqueta
+\newcommand{\rotulocap}[1]{\esquina\par\vspace{6pt}\etiqueta{#1}}
+
+% ---------------- Títulos ----------------
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\sffamily\color{tinta}}
+  {\rotulocap{\chaptertitlename\ \padnum{\thechapter}}}
+  {14pt}
+  {\fontsize{28}{33}\selectfont\bfseries\raggedright}
+  [\vspace{10pt}{\color{borde}\titlerule[0.6pt]}]
+\titleformat{name=\chapter,numberless}[display]
+  {\normalfont\sffamily\color{tinta}}
+  {\rotulocap{Trabajo Final de Módulo}}
+  {14pt}
+  {\fontsize{28}{33}\selectfont\bfseries\raggedright}
+  [\vspace{10pt}{\color{borde}\titlerule[0.6pt]}]
+\titlespacing*{\chapter}{0pt}{0pt}{22pt}
+\titleformat{\section}{\normalfont\sffamily\Large\bfseries\color{tinta}\raggedright}
+  {\ttfamily\mdseries\color{acento}\thesection}{0.8em}{}
+\titleformat{\subsection}{\normalfont\sffamily\large\bfseries\color{tinta}\raggedright}
+  {\ttfamily\mdseries\color{acento}\thesubsection}{0.8em}{}
+\titlespacing*{\section}{0pt}{20pt plus 3pt}{6pt}
+\titlespacing*{\subsection}{0pt}{14pt plus 2pt}{4pt}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+
+% ---------------- Índice ----------------
+\usepackage{titletoc}
+\titlecontents{chapter}[2.6em]{\addvspace{10pt}\sffamily\bfseries\color{tinta}}
+  {\llap{\makebox[2.6em][l]{\ttfamily\mdseries\color{acento}\padnum{\thecontentslabel}}}}
+  {}
+  {\hfill\ttfamily\mdseries\color{suave}\thecontentspage}
+\titlecontents{section}[5.6em]{\addvspace{1pt}\color{tinta}}
+  {\llap{\makebox[3em][l]{\ttfamily\small\color{acento}\thecontentslabel}}}
+  {}
+  {\titlerule*[0.7pc]{\textcolor{borde}{.}}\ttfamily\small\color{suave}\thecontentspage}
+\titlecontents{subsection}[8.8em]{\small\color{tinta}}
+  {\llap{\makebox[3.2em][l]{\ttfamily\footnotesize\color{acento}\thecontentslabel}}}
+  {}
+  {\titlerule*[0.7pc]{\textcolor{borde}{.}}\ttfamily\footnotesize\color{suave}\thecontentspage}
+
+% ---------------- Cabecera y pie ----------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{{\ttfamily\scriptsize\color{suave}\textls[120]{\MakeUppercase{\leftmark}}}}
+\fancyhead[R]{\ttfamily\scriptsize\color{acento}\textls[120]{SOC · OLEOSIERRA}}
+% Pie: número de página centrado entre dos líneas azules
+\newcommand{\barrapie}{{\color{acento}\rule[0.55ex]{0.8cm}{0.6pt}}}
+\newcommand{\pie}{%
+  \fancyfoot[C]{\barrapie\hspace{8pt}{\ttfamily\footnotesize\color{tinta}\padnum{\thepage}}\hspace{8pt}\barrapie}}
+\pie
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\headrule}{\ifdim\headrulewidth>0pt{\color{borde}\hrule height\headrulewidth width\headwidth}\fi}
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
+\fancypagestyle{plain}{\fancyhf{}\pie\renewcommand{\headrulewidth}{0pt}}
+
+% ---------------- Figuras, tablas y listas ----------------
+\usepackage{graphicx}
+\usepackage{float}   % [H]: la tabla se queda donde se escribe
+\usepackage{caption}
+\DeclareCaptionFont{etiq}{\ttfamily\color{acento}}
+\DeclareCaptionLabelFormat{mayus}{\textls[120]{\MakeUppercase{#1}~#2}}
+\captionsetup{font=small, labelfont={small,etiq}, labelformat=mayus, labelsep=quad}
+\usepackage{enumitem}
+\setlist{itemsep=2pt,topsep=4pt}
+\setlist[itemize]{label=\textcolor{acento}{\rule[0.32ex]{4pt}{4pt}}}
+\setlist[enumerate]{label=\textcolor{acento}{\ttfamily\small\padnum{\arabic*}}}
+% Tablas con el contenido SIEMPRE centrado (horizontal y vertical):
+%   \begin{tabularx}{\linewidth}{C C C} ... \end{tabularx}
+\usepackage{array,tabularx,booktabs}
+\renewcommand{\tabularxcolumn}[1]{m{#1}}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\newcolumntype{K}{>{\hsize=0.62\hsize\centering\arraybackslash}X}   % columna estrecha centrada
+\newcolumntype{Y}{>{\hsize=1.38\hsize\centering\arraybackslash}X}   % columna ancha centrada
+\newcolumntype{Q}{>{\hsize=0.75\hsize\centering\arraybackslash}X}   % tabla de 3 columnas: estrecha
+\newcolumntype{V}{>{\hsize=0.85\hsize\centering\arraybackslash}X}   % media
+\newcolumntype{Z}{>{\hsize=1.40\hsize\centering\arraybackslash}X}   % ancha
+% Columna centrada de anchura relativa: P{0.8}, P{1.4}...
+% (la suma de los factores debe ser igual al número de columnas)
+\newcolumntype{P}[1]{>{\hsize=#1\hsize\centering\arraybackslash}X}
+\usepackage{colortbl}
+\renewcommand{\arraystretch}{1.35}
+
+% Estilo común de las tablas: \estilotabla (o \estilotabla[1.45] para tablas densas)
+\newcommand{\estilotabla}[1][1.7]{%
+  \setlength{\aboverulesep}{0pt}\setlength{\belowrulesep}{0pt}%
+  \renewcommand{\arraystretch}{#1}}
+% Línea superior (azul) e inferior de las tablas
+\newcommand{\reglasup}{\noalign{{\color{acento}\hrule height 1.4pt}}}
+\newcommand{\reglainf}{\noalign{{\color{tinta}\hrule height 0.8pt}}}
+% Celda de cabecera: texto monoespaciado en mayúsculas sobre fondo negro
+\newcommand{\cab}[1]{\textcolor{cabtexto}{\ttfamily\footnotesize\bfseries\textls[80]{\MakeUppercase{#1}}}}
+
+% ---------------- Diagrama ----------------
+\usepackage{tikz}
+\usetikzlibrary{positioning,fit,backgrounds,arrows.meta,calc,babel}
+
+% ---------------- Enlaces ----------------
+\usepackage[hidelinks]{hyperref}
+\usepackage{xurl}   % permite cortar las URL largas
+
+% ---------------- Huecos para imágenes ----------------
+% \imagen{archivo}{pie de figura}{etiqueta}
+% Guarda la imagen junto a main.tex (o en una carpeta, p. ej. capturas/proxmox.png).
+% Mientras no exista, aparece un recuadro con el nombre del archivo que falta.
+\newcommand{\imagen}[3]{%
+  \begin{figure}[H]
+    \centering
+    \IfFileExists{#1}%
+      {\includegraphics[width=0.9\linewidth,height=0.42\textheight,keepaspectratio]{#1}}%
+      {\begin{tikzpicture}
+         \node[draw=borde, dashed, line width=0.6pt, fill=zona,
+               minimum width=0.9\linewidth, minimum height=5.2cm, align=center] (h)
+           {{\ttfamily\small\bfseries\color{acento}\textls[220]{INSERTAR IMAGEN}}\\[5pt]
+            {\ttfamily\scriptsize\color{guia}\detokenize{#1}}};
+         \draw[acento, line width=0.8pt] ($(h.north west)+(-4pt,-0.45cm)$) -- ++(0,0.45cm+4pt) -- ++(0.45cm,0);
+         \draw[acento, line width=0.8pt] ($(h.south east)+(4pt,0.45cm)$) -- ++(0,-0.45cm-4pt) -- ++(-0.45cm,0);
+       \end{tikzpicture}}%
+    \caption{#2}\label{#3}%
+  \end{figure}}
+
+% Texto guía entre corchetes (en gris para que se vea que hay que sustituirlo)
+\newcommand{\guia}[1]{{\color{guia}\itshape[#1]}}
+
+% =====================================================================
+\begin{document}
+
+% ============================ PORTADA ================================
+% Datos de la portada: cámbialos aquí
+\newcommand{\alumno}{Daniel Damota Maldonado}
+\newcommand{\profesor}{Carlos Basulto Pardo}
+\newcommand{\asignatura}{Incidentes de Ciberseguridad}
+\newcommand{\fechaentrega}{[dd/mm/aaaa]}
+
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture, overlay,
+    dato/.style={anchor=north west, inner sep=0pt, text width=7.2cm, align=left}]
+\begin{scope}[shift={(current page.north west)}]
+  % ---- Fondo y retícula de puntos ----
+  \fill[negro] (-0.1,0.1) rectangle (21.1,-29.8);
+  \foreach \x in {0.5,1.0,...,20.5}
+    \foreach \y in {-0.5,-1.0,...,-29.5}
+      \fill[puntos] (\x,\y) circle (0.4pt);
+  % Arcos de fondo a la izquierda
+  \draw[lineaweb, line width=0.5pt, dash pattern=on 1pt off 2pt] (-4,-15) circle (8.5);
+  \draw[lineaweb, line width=0.5pt, dash pattern=on 1pt off 2pt] (-4,-15) circle (11);
+  \draw[lineaweb, line width=0.5pt] (21.5,-2.5) circle (6.5);
+
+  % ---- Redes de nodos (fondo) ----
+  % Nodo pequeño y nodo con halo
+  \tikzset{
+    nodo/.pic={\fill[azul] (0,0) circle (1.5pt);},
+    nodohalo/.pic={\fill[azul, opacity=0.16] (0,0) circle (8pt);
+                   \draw[azul, line width=0.6pt, opacity=0.8] (0,0) circle (4pt);
+                   \fill[azul] (0,0) circle (2pt);}}
+  % Zona superior derecha
+  \coordinate (r1) at (8.0,-2.9);  \coordinate (r2) at (11.0,-0.7);
+  \coordinate (r3) at (13.4,-2.4); \coordinate (r4) at (16.9,-1.4);
+  \coordinate (r5) at (19.6,-3.1); \coordinate (r6) at (20.7,-0.5);
+  \coordinate (r7) at (18.5,-5.7); \coordinate (r8) at (20.3,-8.6);
+  \draw[azul, line width=0.5pt, opacity=0.4]
+    (r1) -- (r3) -- (r2)  (r3) -- (r4) -- (r5) -- (r6) -- (r4)
+    (r5) -- (r7) -- (r8);
+  \foreach \p in {r1,r2,r3,r5,r6,r7} \pic at (\p) {nodo};
+  \foreach \p in {r4,r8} \pic at (\p) {nodohalo};
+  % Franja inferior (entre el texto y los datos)
+  \coordinate (s1) at (0.8,-19.0);  \coordinate (s2) at (4.2,-20.9);
+  \coordinate (s3) at (7.9,-19.5);  \coordinate (s4) at (11.5,-21.4);
+  \coordinate (s5) at (14.6,-19.1); \coordinate (s6) at (17.6,-21.0);
+  \coordinate (s7) at (20.5,-18.4);
+  \draw[azul, line width=0.5pt, opacity=0.4]
+    (s1) -- (s2) -- (s3) -- (s4) -- (s5) -- (s6) -- (s7)
+    (s2) -- (s4)  (s3) -- (s5);
+  \foreach \p in {s2,s3,s5,s6} \pic at (\p) {nodo};
+  \foreach \p in {s1,s4,s7} \pic at (\p) {nodohalo};
+
+  % ---- Esquinas en escuadra ----
+  \draw[azul, line width=0.7pt] (1.8,-3.9) -- (1.8,-3.3) -- (2.4,-3.3);
+  \draw[azul, line width=0.7pt] (19.2,-19.2) -- (19.2,-19.8) -- (18.6,-19.8);
+
+  % ---- Etiqueta y título ----
+  \draw[azul, line width=0.7pt] (2.4,-4.2) -- (3.4,-4.2);
+  \node[anchor=west, font=\ttfamily\small, text=azul] at (3.7,-4.2)
+    {\textls[300]{TRABAJO FINAL DE MÓDULO}};
+  \node[anchor=north west, inner sep=0pt, text width=16.4cm, align=left,
+        font=\sffamily\bfseries\fontsize{38}{43}\selectfont, text=blanco] at (2.3,-4.95)
+    {\textls[-20]{Centro de Operaciones}\\\textls[-20]{de Seguridad}\\{\color{azul}\textls[-20]{asistido por IA local}}};
+
+  % ---- Párrafo ----
+  \node[anchor=north west, inner sep=0pt, text width=8.4cm, align=left,
+        font=\sffamily\fontsize{10.5}{16}\selectfont, text=grismedio] (parrafo) at (2.4,-11.6)
+    {Propuesta técnica de implantación para \textcolor{blanco}{\bfseries Oleosierra, S.~Coop.~And.}:
+     un SOC que detecta los ataques en sus primeras fases, prioriza las alertas con un modelo
+     de lenguaje que se ejecuta en la propia cooperativa y documenta cada incidente según la
+     normativa vigente.};
+
+  % ---- Botones (siempre 0,9 cm por debajo del párrafo) ----
+  \node[anchor=north west, fill=azulboton, inner xsep=12pt, inner ysep=9pt,
+        font=\sffamily\small\bfseries, text=white] (b1) at ([yshift=-0.9cm]parrafo.south west) {Propuesta técnica};
+  \node[anchor=north west, draw=bordeweb, line width=0.6pt, fill=negro, inner xsep=12pt, inner ysep=9pt,
+        font=\sffamily\small\bfseries, text=blanco] at ([xshift=0.3cm]b1.north east)
+    {\tikz[baseline=-0.6ex]{\fill[azul, rounded corners=0.8pt] (0,-0.1) rectangle (0.3,0.1);}\hspace{6pt}Oleosierra, S.~Coop.~And.};
+
+  % ---- Retícula circular (desplazada a la derecha y reducida para separarla del texto) ----
+% ---- Emblema SOC · IA (Radar SIEM, escudo y malla neuronal) ----
+  \begin{scope}[shift={(16.1,-13.9)}, scale=0.82]
+    \coordinate (c) at (0,0);
+
+    % Fondo de radar y órbitas de telemetría
+    \shade[inner color=azul!28!negro, outer color=superficie] (c) circle (2.85);
+    \draw[bordeweb, line width=0.5pt, dash pattern=on 0.8pt off 1.8pt] (c) circle (3.65);
+    \draw[azul, line width=0.45pt, opacity=0.6] (c) circle (3.2);
+    \draw[azul, line width=1.5pt] ([shift={(115:3.2)}]c) arc[start angle=115, end angle=215, radius=3.2];
+    \draw[azul, line width=1.5pt] ([shift={(-65:3.2)}]c) arc[start angle=-65, end angle=35, radius=3.2];
+
+    % Ejes del sonar
+    \begin{scope}[azul, line width=0.65pt, opacity=0.85]
+      \draw (0,2.85) -- (0,3.95);  \draw (0,-2.85) -- (0,-3.95);
+      \draw (-2.85,0) -- (-3.95,0); \draw (2.85,0) -- (3.95,0);
+    \end{scope}
+
+    % Escudo exterior
+    \draw[fill=superficie, draw=azul, line width=1.05pt, opacity=0.95]
+      (0,2.15) -- (1.75,1.45) -- (1.75,-0.2)
+      .. controls (1.75,-1.35) and (0.85,-2.05) .. (0,-2.4)
+      .. controls (-0.85,-2.05) and (-1.75,-1.35) .. (-1.75,-0.2)
+      -- (-1.75,1.45) -- cycle;
+
+    % Hexágono neuronal interno (procesamiento del LLM)
+    \begin{scope}[shift={(0,0.1)}]
+      \foreach \a in {30,90,...,330} {
+        \draw[azul, line width=0.55pt, opacity=0.8] (0,0) -- (\a:1.15);
+        \draw[grisclaro, line width=0.4pt, opacity=0.45] (\a:1.15) -- (\a+60:1.15);
+      }
+      \foreach \a in {30,90,...,330}
+        \fill[blanco] (\a:1.15) circle (2.3pt);
+
+      \fill[azul, opacity=0.25] (0,0) circle (9.5pt);
+      \fill[azul] (0,0) circle (4.2pt);
+      \fill[blanco] (0,0) circle (1.6pt);
+    \end{scope}
+
+    % Etiquetas técnicas
+    \node[font=\ttfamily\tiny\bfseries, text=azul] at (0,1.62) {\textls[120]{SIEM · IDS}};
+    \node[fill=negro, draw=bordeweb, line width=0.5pt, rounded corners=1.5pt,
+          inner xsep=5pt, inner ysep=2pt, font=\ttfamily\tiny\bfseries, text=blanco]
+          at (0,-1.65) {\textls[140]{SOC · IA}};
+  \end{scope}
+
+  % ---- Datos del trabajo ----
+  \draw[lineaweb, line width=0.6pt] (2.4,-22.4) -- (18.6,-22.4);
+  \node[dato] at (2.4,-23.05)
+    {{\ttfamily\scriptsize\color{azul}\textls[220]{ALUMNO}}\\[5pt]{\sffamily\color{blanco}\alumno}};
+  \node[dato] at (10.8,-23.05)
+    {{\ttfamily\scriptsize\color{azul}\textls[220]{PROFESOR}}\\[5pt]{\sffamily\color{blanco}\profesor}};
+  \node[dato] at (2.4,-24.85)
+    {{\ttfamily\scriptsize\color{azul}\textls[220]{MÓDULO}}\\[5pt]{\sffamily\color{blanco}\asignatura}};
+  \node[dato] at (10.8,-24.85)
+    {{\ttfamily\scriptsize\color{azul}\textls[220]{FECHA DE ENTREGA}}\\[5pt]{\sffamily\color{blanco}\fechaentrega}};
+
+  % ---- Pie ----
+  \draw[lineaweb, line width=0.6pt] (-0.1,-27.9) -- (21.1,-27.9);
+  \node[anchor=west, font=\ttfamily\tiny, text=grismedio] at (2.4,-28.55)
+    {\textls[200]{CURSO DE ESPECIALIZACIÓN EN CIBERSEGURIDAD · 2026--2027}};
+  \node[anchor=east, font=\ttfamily\tiny, text=grismedio] at (18.6,-28.55)
+    {\textls[200]{EMPRESA Y DATOS FICTICIOS}};
+\end{scope}
+\end{tikzpicture}
+\end{titlepage}
+
+% ============================ ÍNDICE =================================
+% Páginas del índice sin número (ni cabecera)
+\pagenumbering{roman}
+\begingroup
+  \pagestyle{empty}
+  \fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}}
+  % Título del índice sin la etiqueta «Trabajo Final de Módulo»
+  \titleformat{name=\chapter,numberless}[block]
+    {\normalfont\sffamily\color{tinta}}
+    {}
+    {0pt}
+    {\fontsize{28}{33}\selectfont\bfseries\raggedright}
+    [\vspace{10pt}{\color{borde}\titlerule[0.6pt]}]
+  \tableofcontents
+  \clearpage
+\endgroup
+\pagenumbering{arabic}
+
+% ============================ 1 =====================================
+\chapter{Introducción y justificación}
+\section{Contexto de la organización}
+\guia{Presenta la empresa (ficticia): sector, tamaño, plantilla, facturación, estacionalidad de la actividad, situación actual de su informática y datos personales que trata. Resume sus datos principales en una tabla.}
+
+\section{Problema y motivación}
+\guia{Explica por qué la empresa necesita un SOC: amenazas del sector (ransomware y phishing, según ENISA), incidentes previos o cercanos, por qué se elige la propuesta F1, por qué Wazuh y por qué un modelo de lenguaje local para reducir la fatiga de alertas.}
+
+\section{Objetivos}
+\guia{Objetivo general del proyecto y objetivos específicos numerados (OE1, OE2...), medibles y alineados con el desarrollo técnico.}
+
+\section{Alcance y limitaciones}
+\guia{Describe qué incluye el trabajo (laboratorio en Proxmox VE, máquinas y VLAN) y qué queda fuera del alcance. Indica las condiciones éticas y legales de las pruebas.}
+
+% ============================ 2 =====================================
+\chapter{Desarrollo técnico}
+
+\guia{Introduce brevemente el capítulo: análisis de riesgos, arquitectura, implantación, validación, procedimientos organizativos y costes.}
+
+\section{Análisis de riesgos y superficie de ataque}
+\subsection{Inventario de activos}
+\guia{Enumera los activos de la empresa (controlador de dominio, carpeta de liquidaciones, copias de seguridad, puestos de trabajo, correo, sistema de la almazara) y su criticidad.}
+\subsection{Superficie de ataque}
+\guia{Describe por dónde podría entrar un atacante: superficie externa (correo, accesos remotos, web), humana (personal y temporeros), proveedores y acceso físico.}
+\subsection{Matriz de riesgos}
+\guia{Explica la metodología (por ejemplo, MAGERIT simplificada: probabilidad × impacto) y presenta la matriz de riesgos con su nivel (bajo, medio, alto o crítico).}
+\imagen{capturas/matriz_riesgos.png}{Matriz de riesgos de Oleosierra (probabilidad × impacto)}{fig:matriz}
+\subsection{Incidentes más probables}
+\guia{A partir de la matriz, identifica y justifica los tres incidentes más probables en el sector: ransomware, phishing con fraude por correo y acceso no autorizado con credenciales robadas. Indica qué escenarios de prueba de la sección~\ref{sec:validacion} reproducen cada uno.}
+
+% ---------------------------------------------------------------------
+\section{Arquitectura de monitorización}
+\subsection{Visión general}
+\guia{Describe la arquitectura general de la solución e incluye un diagrama con el host, el cortafuegos, las VLAN, las máquinas y los flujos principales.}
+\subsection{Segmentación de la red}
+\guia{Presenta las VLAN del laboratorio y su equivalencia en la cooperativa, y la política de filtrado entre VLAN (denegación por defecto).}
+\subsection{Componentes tecnológicos}
+\guia{Tabla con los componentes, su versión y su función en el proyecto.}
+\subsection{SIEM: Wazuh}
+\guia{Qué es un SIEM, por qué se elige Wazuh frente a otras opciones, cómo se despliega y qué fuentes de eventos recibe.}
+\subsection{Telemetría de endpoints: Sysmon}
+\guia{Qué aporta Sysmon frente a los registros nativos de Windows, eventos utilizados y configuración de partida.}
+\subsection{Detección de intrusiones: Suricata}
+\guia{Interfaces que inspecciona, conjunto de reglas ET Open y paso de IDS a IPS.}
+\subsection{Inteligencia de amenazas}
+\guia{Fuentes de inteligencia de amenazas (ET Open y VirusTotal) y limitaciones de la API pública de VirusTotal.}
+
+% ---------------------------------------------------------------------
+\section{Implantación en laboratorio}
+\subsection{Metodología}
+\guia{Describe las fases de la implantación y el hito de verificación de cada una.}
+\subsection{Máquinas virtuales y direccionamiento}
+\guia{Tabla con las máquinas virtuales, su sistema operativo, dirección IP y recursos. Requisitos del host.}
+\subsection{Proxmox VE y red virtual}
+\guia{Instalación del host, bridges con soporte de VLAN y snapshots.}
+\subsection{OPNsense y Suricata}
+\guia{Interfaces VLAN, DHCP y DNS, reglas del cortafuegos, pruebas de segmentación y configuración de Suricata.}
+\subsection{Wazuh en Docker}
+\guia{Preparación del host, certificados, Docker Compose y acceso al panel.}
+\subsection{Agentes y fuentes de eventos}
+\guia{Agentes de Windows y Linux, Sysmon, syslog de OPNsense y decodificadores de Suricata.}
+\subsection{VirusTotal, FIM y respuesta activa}
+\guia{Directorios monitorizados, integración con la API, respuesta activa y prueba con EICAR.}
+\subsection{Reglas de detección propias}
+\guia{Reglas y decodificadores propios con su técnica de MITRE ATT\&CK.}
+
+% ---------------------------------------------------------------------
+\section{Triaje de alertas asistido por IA}
+\subsection{Funcionamiento}
+\guia{Describe la integración entre Wazuh y Ollama: qué alertas se envían al modelo, cómo se construye el prompt y cómo vuelve el análisis al panel. Incluye un diagrama del flujo.}
+\subsection{Decisiones de diseño y salvaguardas}
+\guia{Disparo selectivo, fallo seguro, aislamiento, protección frente a la inyección de instrucciones y supervisión humana.}
+\subsection{Selección del modelo}
+\guia{Modelos comparados, criterios y modelo elegido.}
+
+% ---------------------------------------------------------------------
+\section{Validación con escenarios de ataque}
+\label{sec:validacion}
+\subsection{Escenarios}
+\guia{Tabla con los escenarios de prueba (técnica de MITRE ATT\&CK, herramienta, fuente de detección y resultado esperado) y relación con los incidentes más probables.}
+\subsection{Resultados}
+\guia{Criterios de éxito fijados en el anteproyecto y resultados obtenidos, con un análisis crítico.}
+
+% ---------------------------------------------------------------------
+\section{Playbooks de respuesta a incidentes}
+\subsection{Organización de la respuesta}
+\guia{Define los niveles de escalado (L1, L2 y L3), quién interviene en cada uno y la matriz RACI de responsabilidades. Sigue las fases de NIST SP 800-61r3.}
+\subsection{Playbook 1: ransomware}
+\guia{Detalla cada fase (detección, análisis, contención, erradicación, recuperación, notificación y lecciones aprendidas) con sus acciones, responsables y herramientas. Indica qué alertas del SOC lo activan (escenarios E5 a E7) y qué acciones de contención ofrece Wazuh.}
+\imagen{capturas/playbook_ransomware.png}{Diagrama de flujo del playbook de ransomware}{fig:pb1}
+\subsection{Playbook 2: phishing y fraude por correo}
+\guia{Misma estructura que el playbook anterior, adaptada a este incidente (escenario E4).}
+\imagen{capturas/playbook_phishing.png}{Diagrama de flujo del playbook de phishing y fraude por correo}{fig:pb2}
+\subsection{Playbook 3: acceso no autorizado}
+\guia{Misma estructura que el playbook anterior, adaptada a este incidente (escenarios E2 y E3).}
+\imagen{capturas/playbook_acceso.png}{Diagrama de flujo del playbook de acceso no autorizado}{fig:pb3}
+\subsection{Simulacro}
+\guia{Documenta al menos un simulacro de mesa: fecha, participantes, escenario, tiempos, decisiones tomadas y mejoras detectadas.}
+
+\section{Plan de concienciación}
+\guia{Identifica los colectivos de la empresa y su riesgo principal, define las acciones formativas con su calendario (sesiones, píldoras, simulacro de phishing) y los indicadores para medir su eficacia (tasa de clics, correos reportados, plantilla formada). Incluye la formación del técnico en el uso del analista de IA (alfabetización en IA, capítulo~\ref{cap:normativa}).}
+\imagen{capturas/simulacro_phishing.png}{Correo utilizado en el simulacro de phishing}{fig:simulacro}
+
+\section{Procedimiento de notificación a autoridades}
+\guia{Explica cómo se clasifica un incidente (taxonomía y niveles de la Guía nacional de notificación y gestión de ciberincidentes) y a quién se notifica, en qué plazo y por qué canal: AEPD (72 horas), personas afectadas, INCIBE-CERT, CSIRT de referencia si aplica NIS2, Fuerzas y Cuerpos de Seguridad y aseguradora. Describe también el comité de crisis y la comunicación interna.}
+\imagen{capturas/flujo_notificacion.png}{Flujo de notificación y comité de crisis}{fig:notificacion}
+
+\section{Estimación del coste de implantación}
+\guia{Calcula la inversión inicial: servidor con los requisitos del laboratorio (8 núcleos y 16 hilos, 64 GB de RAM, 1 TB NVMe y GPU opcional para Ollama), horas de implantación y formación. El software es gratuito, pero en producción hay que contar con la API de pago de VirusTotal (o una alternativa con uso comercial permitido). Calcula también el coste anual de operación (horas del técnico, mantenimiento y consumo eléctrico) y compáralo con contratar un SOC gestionado y con el coste de sufrir un incidente en plena campaña.}
+
+% ============================ 3 =====================================
+\chapter{Marco normativo aplicable}
+\label{cap:normativa}
+
+\guia{Analiza qué normas debe cumplir la empresa, qué le exigen y cómo las cubre la propuesta.}
+
+\section{Protección de datos: RGPD y LOPDGDD}
+\guia{Aplicabilidad, obligaciones (arts. 5, 24, 32, 33 y 34), tratamiento de datos por el propio SOC y necesidad de DPD.}
+\section{Directiva NIS2}
+\guia{Sector, tamaño de la empresa, estado de la transposición en España y obligaciones futuras.}
+\section{ISO/IEC 27001:2022}
+\guia{Controles del anexo A que cubre el SOC y ventajas de la certificación.}
+\section{Reglamento de Inteligencia Artificial}
+\guia{Clasificación del analista de IA según su riesgo y obligaciones que se derivan (alfabetización en IA).}
+\section{Resumen}
+\guia{Tabla resumen: norma, si es obligatoria y motivo.}
+
+% ============================ 4 =====================================
+\chapter{Conclusiones}
+\section{Resultados obtenidos}
+\guia{Valora en qué medida se han cumplido los objetivos OE1 a OE9, con los resultados de las pruebas y del resto del trabajo.}
+\section{Limitaciones}
+\guia{Reflexiona sobre las limitaciones del trabajo: laboratorio frente a empresa real, número de escenarios, ataques conocidos de antemano, tamaño de los modelos y ejecución sin GPU, y límites de la API pública de VirusTotal.}
+\section{Líneas de mejora}
+\guia{Propón cómo continuar el trabajo: respuesta automática supervisada, asistente conversacional de threat hunting, nuevas fuentes de registros (correo en la nube, NAS de copias), más modelos o vigilancia de la red industrial de la almazara.}
+
+% ===================== DECLARACIÓN DE USO DE IA ======================
+\chapter*{Declaración de uso de IA generativa}
+\addcontentsline{toc}{chapter}{Declaración de uso de IA generativa}
+\markboth{Declaración de uso de IA generativa}{}
+
+\guia{Declara las herramientas de IA generativa utilizadas, en qué partes del trabajo y de qué forma.}
+
+% ============================ 5 =====================================
+\chapter{Referencias bibliográficas}
+
+\guia{Fuentes citadas en formato APA 7.ª edición, en orden alfabético.}
+
+% ============================ ANEXOS ================================
+\appendix
+\renewcommand{\appendixname}{Anexo}
+\chapter{Capturas y evidencias del laboratorio}
+\guia{Capturas de pantalla ordenadas por capítulo, cada una con su pie de figura.}
+
+\chapter{Ficheros de configuración}
+\guia{Extractos comentados o enlace al repositorio con: docker-compose.yml, bloques relevantes de ossec.conf, reglas y decodificadores propios, script custom-ollama y exportación de las reglas de OPNsense. No incluyas la clave de la API de VirusTotal.}
+
+\chapter{Informes de los incidentes simulados}
+\label{anx:informes}
+\guia{Un informe por escenario (E1 a E7): detección, clasificación según la Guía nacional de notificación y gestión de ciberincidentes, contención, erradicación, recuperación y lecciones aprendidas, junto con el análisis de la IA y su comparación con el análisis manual.}
+
+\chapter{Playbooks en formato visual}
+\guia{Diagramas de flujo de los tres playbooks.}
+
+\chapter{Materiales de concienciación}
+\guia{Infografías, guiones de las píldoras formativas y correo del simulacro de phishing.}
+
+\chapter{Plantillas de notificación}
+\guia{Formulario de notificación de brechas de la AEPD cumplimentado, aviso a los afectados y comunicación interna.}
+
+\chapter{Relación con los resultados de aprendizaje}
+\guia{Tabla que relacione el trabajo con los resultados de aprendizaje RA1 a RA5 del módulo (Real Decreto 479/2020).}
+
+
+\end{document}
