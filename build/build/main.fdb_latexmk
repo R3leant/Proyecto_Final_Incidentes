@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1795082079.16404 "c:/Users/danie/Desktop/Proyecto final/main.tex" "build/main.pdf" "main" 1795082083.17746 0
+["pdflatex"] 1795082389.5439 "c:/Users/danie/Desktop/Proyecto final/main.tex" "build/main.pdf" "main" 1795082393.84899 0
   "C:/Users/danie/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1794561338 296753 e1f4de3c33b05439dbf7cb5cae230368 ""
   "C:/Users/danie/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1762353985 13321867 e81c5c29f12db5857e55432c52fccef5 ""
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/plex/plx_2jqefy.enc" 1753651275 2800 a6f1aadd9b602774605ec66a0faf19c9 ""
@@ -206,11 +206,11 @@
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/tex/latex/xkeyval/xkeyval.sty" 1656236919 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/tex/latex/xurl/xurl.sty" 1641733940 4675 e4b8c405820368c2dfb03526e16d725a ""
-  "build/build/main.aux" 1795082082 12987 2025d99fb973541299eb9ff55b3e451e "pdflatex"
-  "build/build/main.out" 1795082082 11920 377e63a4153f1f7de5d7fc19d4333fff "pdflatex"
-  "build/build/main.toc" 1795082082 5730 c73cbebc2f490119bc419759f4d1baea "pdflatex"
-  "c:/Users/danie/Desktop/Proyecto final/main.tex" 1795081980 55202 dcdee9e47fc5af7df3b2743036b37e05 ""
-  "main.tex" 1795081980 55202 dcdee9e47fc5af7df3b2743036b37e05 ""
+  "build/build/main.aux" 1795082393 13266 fa95e41424ebb1854f1b6dc955f8cb27 "pdflatex"
+  "build/build/main.out" 1795082393 11920 48187f66bb8c948e7ece8ddf608b3ada "pdflatex"
+  "build/build/main.toc" 1795082393 5730 e448ae271f153d74f4e6c2c326428fe3 "pdflatex"
+  "c:/Users/danie/Desktop/Proyecto final/main.tex" 1795082384 66225 8b532de424d510eaa4b2a2d856bf6ab3 ""
+  "main.tex" 1795082384 66225 8b532de424d510eaa4b2a2d856bf6ab3 ""
   (generated)
   "build/build/main.aux"
   "build/build/main.log"

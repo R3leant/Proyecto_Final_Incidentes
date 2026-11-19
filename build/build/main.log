@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.11.5)  19 NOV 2026 10:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.11.5)  19 NOV 2026 10:59
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -918,62 +918,78 @@ Cap\'{\i }tulo 3.
 [16
 
 ]
+
+LaTeX Info: Redefining \. on input line 782.
+LaTeX Info: Redefining \% on input line 782.
+[17]
+
+LaTeX Info: Redefining \. on input line 805.
+LaTeX Info: Redefining \% on input line 805.
+[18]
+
+LaTeX Info: Redefining \. on input line 834.
+LaTeX Info: Redefining \% on input line 834.
+[19]
 Cap\'{\i }tulo 4.
-
-
-[17
-
-]
-
-[18
-
-]
-Cap\'{\i }tulo 5.
-
-
-[19
-
-]
-Anexo A.
 
 
 [20
 
 ]
-Anexo B.
-
 
 [21
 
 ]
-Anexo C.
+Cap\'{\i }tulo 5.
 
 
 [22
 
 ]
-Anexo D.
 
-
-[23
-
-]
-Anexo E.
+LaTeX Info: Redefining \. on input line 874.
+LaTeX Info: Redefining \% on input line 874.
+[23]
+Anexo A.
 
 
 [24
 
 ]
-Anexo F.
+Anexo B.
 
 
 [25
 
 ]
-Anexo G.
+Anexo C.
 
 
 [26
+
+]
+Anexo D.
+
+
+[27
+
+]
+Anexo E.
+
+
+[28
+
+]
+Anexo F.
+
+
+[29
+
+]
+Anexo G.
+
+
+[30
 
 ] (c:\Users\danie\Desktop\Proyecto final\build\build\main.aux
 LaTeX Info: Redefining \. on input line 11.
@@ -984,20 +1000,20 @@ LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-10-09>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 377E63A4153F1F7DE5D7FC19D4333FFF;11920.
+(rerunfilecheck)             Checksum: 48187F66BB8C948E7ECE8DDF608B3ADA;11920.
  ) 
 Here is how much of TeX's memory you used:
- 28910 strings out of 468080
- 551327 string characters out of 5425772
- 2117126 words of memory out of 5000000
- 56520 multiletter control sequences out of 15000+600000
- 954599 words of font info for 412 fonts, out of 8000000 for 9000
+ 28958 strings out of 468080
+ 552274 string characters out of 5425772
+ 2117209 words of memory out of 5000000
+ 56527 multiletter control sequences out of 15000+600000
+ 958235 words of font info for 436 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,13n,117p,1041b,1193s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/ibm/plex/plxMono-Bold.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/ibm/plex/plxMono.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/ibm/plex/plxSans-Bold.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/ibm/plex/plxSans-Italic.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/ibm/plex/plxSans.pfb>
-Output written on "c:\Users\danie\Desktop\Proyecto final\build\build\main.pdf" (30 pages, 398065 bytes).
+Output written on "c:\Users\danie\Desktop\Proyecto final\build\build\main.pdf" (34 pages, 416150 bytes).
 PDF statistics:
- 626 PDF objects out of 1000 (max. 8388607)
- 114 named destinations out of 1000 (max. 500000)
+ 656 PDF objects out of 1000 (max. 8388607)
+ 119 named destinations out of 1000 (max. 500000)
  134155 words of extra memory for PDF output out of 154059 (max. 10000000)
 

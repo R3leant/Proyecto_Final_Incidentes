@@ -748,18 +748,87 @@ La API pública de VirusTotal limita las consultas a 4 por minuto y 500 al día,
 \chapter{Marco normativo aplicable}
 \label{cap:normativa}
 
-\guia{Analiza qué normas debe cumplir la empresa, qué le exigen y cómo las cubre la propuesta.}
+Este capítulo analiza las normas que Oleosierra debe cumplir, qué le exigen y por qué le afectan, además de la norma ISO/IEC 27001, cuya certificación facilita el SOC. La situación normativa corresponde a la fecha de redacción (octubre de 2026). La Tabla~\ref{tab:normativa} resume el resultado al final del capítulo.
 
 \section{Protección de datos: RGPD y LOPDGDD}
-\guia{Aplicabilidad, obligaciones (arts. 5, 24, 32, 33 y 34), tratamiento de datos por el propio SOC y necesidad de DPD.}
+
+\textbf{¿Se aplica? Sí, de forma obligatoria.} El Reglamento General de Protección de Datos (RGPD) y la Ley Orgánica 3/2018 (LOPDGDD) se aplican a cualquier organización que trate datos personales. Oleosierra es responsable del tratamiento de tres grandes conjuntos de datos: los de sus 1.200 socios (identificación, cuenta bancaria, kilos entregados y liquidaciones), los de su plantilla, incluido el personal de campaña (nóminas, contratos, datos de salud laboral), y los de los clientes de la tienda en línea.
+
+\textbf{Qué le exige y cómo lo cubre la propuesta:}
+\begin{itemize}
+  \item \textbf{Integridad y confidencialidad} (art.~5.1.f) y \textbf{seguridad del tratamiento} (art.~32): aplicar medidas técnicas y organizativas adecuadas al riesgo, entre ellas la capacidad de detectar y restaurar el servicio tras un incidente. El SOC, los playbooks y la estrategia de copias de seguridad responden directamente a esta obligación.
+  \item \textbf{Responsabilidad proactiva} (art.~24): poder demostrar que se cumple. El registro centralizado de eventos del SIEM y la documentación de cada incidente sirven como evidencia.
+  \item \textbf{Notificación de brechas a la AEPD} (art.~33): sin dilación indebida y, a más tardar, en 72 horas desde que se tiene constancia, salvo que sea improbable que suponga un riesgo. Sin un sistema de detección, la cooperativa podría tardar semanas en saber que ha sufrido una brecha; el SOC reduce ese tiempo y el procedimiento de notificación ordena la respuesta.
+  \item \textbf{Comunicación a los afectados} (art.~34): cuando la brecha suponga un alto riesgo para los socios, trabajadores o clientes.
+\end{itemize}
+
+El propio SOC trata datos personales, porque los registros incluyen nombres de usuario, direcciones IP y actividad de los empleados. Este tratamiento se basa en el interés legítimo en garantizar la seguridad de la red (art.~6.1.f y considerando~49 del RGPD) y debe respetar el principio de minimización y unos plazos de conservación definidos. Por el mismo principio, el diseño evita comunicar datos a terceros: la integración con VirusTotal solo envía el hash de los ficheros, nunca su contenido, y el modelo de IA se ejecuta en un servidor propio. Además, la LOPDGDD (art.~87) y el Estatuto de los Trabajadores exigen informar a la plantilla de que el uso de los equipos de la empresa puede ser supervisado con fines de seguridad, por lo que la implantación del SOC debe ir acompañada de una política de uso de los dispositivos digitales.
+
+Oleosierra no está obligada a designar un delegado de protección de datos (DPD), porque no figura entre los supuestos del artículo~37 del RGPD ni del artículo~34 de la LOPDGDD. Aun así, se recomienda designar uno externo por el volumen de datos de socios que maneja.
+
 \section{Directiva NIS2}
-\guia{Sector, tamaño de la empresa, estado de la transposición en España y obligaciones futuras.}
+
+\textbf{¿Se aplica? Todavía no es exigible en España, pero lo será.} La Directiva (UE) 2022/2555 (NIS2) amplía las obligaciones de ciberseguridad a nuevos sectores. Su anexo~II incluye la \emph{producción, transformación y distribución de alimentos}, en concreto las empresas alimentarias dedicadas a la transformación industrial y a la distribución al por mayor. Oleosierra encaja en ambas actividades: transforma la aceituna en aceite en su almazara y lo vende a granel a envasadoras.
+
+La directiva solo se aplica a medianas y grandes empresas. Con 38 trabajadores fijos y el personal de campaña, Oleosierra suma unas 55 unidades de trabajo anual, y su facturación (14 millones de euros) supera el umbral de 10 millones. Por tanto, es una \textbf{mediana empresa} y, por su sector, sería una \textbf{entidad importante}.
+
+Sin embargo, España no ha completado la transposición. El anteproyecto de Ley de Coordinación y Gobernanza de la Ciberseguridad se aprobó en el Consejo de Ministros el 14 de enero de 2025, pero en octubre de 2026 aún no se ha publicado en el BOE, y la Comisión Europea ha llevado a España ante el Tribunal de Justicia de la UE por el retraso. Mientras tanto sigue vigente la normativa anterior (Real Decreto-ley 12/2018), que no incluye al sector alimentario.
+
+\textbf{Por qué se tiene en cuenta igualmente:} cuando la ley entre en vigor, la cooperativa tendrá que cumplir, entre otras, estas obligaciones:
+\begin{itemize}
+  \item \textbf{Gobernanza} (art.~20): el consejo rector deberá aprobar las medidas de ciberseguridad, supervisarlas y recibir formación, y podrá responder por su incumplimiento.
+  \item \textbf{Medidas de gestión de riesgos} (art.~21): análisis de riesgos, gestión de incidentes, continuidad de negocio, seguridad de la cadena de suministro, formación y control de accesos, entre otras.
+  \item \textbf{Notificación de incidentes significativos} (art.~23) al CSIRT de referencia: alerta temprana en 24 horas, notificación en 72 horas e informe final en un mes.
+\end{itemize}
+Las entidades importantes se enfrentan a multas de hasta 7 millones de euros o el 1,4\,\% de su facturación mundial. La propuesta se diseña desde el principio para cumplir estas obligaciones, de modo que la cooperativa no tenga que improvisar cuando se apruebe la ley.
+
 \section{ISO/IEC 27001:2022}
-\guia{Controles del anexo A que cubre el SOC y ventajas de la certificación.}
+
+La norma ISO/IEC 27001 es voluntaria, pero las grandes envasadoras y cadenas de distribución a las que vende Oleosierra exigen cada vez más garantías de seguridad a sus proveedores. Por eso, obtener la certificación sería una ventaja comercial a medio plazo.
+
+El SOC propuesto \textbf{facilita ese proceso de certificación}, porque ya cumple varios de los controles del anexo~A que el auditor revisará:
+\begin{itemize}
+  \item \textbf{Gestión de incidentes} (A.5.24 a A.5.28): planificación, valoración de eventos, respuesta, lecciones aprendidas y recogida de evidencias, mediante los playbooks y el registro de cada incidente.
+  \item \textbf{Inteligencia de amenazas} (A.5.7), mediante las reglas ET Open de Suricata y la consulta de reputación en VirusTotal.
+  \item \textbf{Concienciación y formación} (A.6.3) y \textbf{notificación de eventos por parte del personal} (A.6.8), mediante el plan de concienciación.
+  \item \textbf{Protección contra el malware} (A.8.7), \textbf{gestión de vulnerabilidades técnicas} (A.8.8) y \textbf{gestión de la configuración} (A.8.9), mediante la integración con VirusTotal, la respuesta activa y los módulos de vulnerabilidades y de evaluación de la configuración de Wazuh.
+  \item \textbf{Registro de la actividad} (A.8.15) y \textbf{monitorización} (A.8.16), mediante el SIEM y el sistema de detección de intrusiones.
+  \item \textbf{Seguridad de las redes} (A.8.20) y \textbf{segregación de redes} (A.8.22), mediante las VLAN y la política de filtrado de OPNsense.
+\end{itemize}
+Además, el análisis de riesgos del capítulo~2 sirve de base para la evaluación y el tratamiento de riesgos que exige la norma. Así, la cooperativa tendría ya implantada y documentada una parte importante del sistema de gestión antes de iniciar la certificación.
+
 \section{Reglamento de Inteligencia Artificial}
-\guia{Clasificación del analista de IA según su riesgo y obligaciones que se derivan (alfabetización en IA).}
+
+\textbf{¿Se aplica? Sí, con obligaciones limitadas.} El Reglamento (UE) 2024/1689 regula los sistemas de IA según su nivel de riesgo. Al utilizar el analista de IA, Oleosierra actúa como \emph{responsable del despliegue}.
+
+El analista de IA \textbf{no es un sistema de alto riesgo}: no figura entre los usos del anexo~III (empleo, crédito, educación, biometría, infraestructuras críticas, etc.), porque se limita a ayudar a clasificar alertas de seguridad de una red corporativa y no toma decisiones sobre personas. Tampoco interactúa con el público, por lo que no le afectan las obligaciones de transparencia del artículo~50.
+
+La obligación que sí le afecta es la \textbf{alfabetización en IA} (art.~4), aplicable desde el 2 de febrero de 2025: la empresa debe adoptar medidas para que las personas que usan el sistema entiendan cómo funciona y cuáles son sus limitaciones. El Reglamento (UE) 2026/1744 (ómnibus digital sobre IA) ha suavizado su redacción, que ahora es una obligación de adoptar medidas y no de garantizar un nivel concreto, pero sigue vigente. La propuesta la cubre con la formación del técnico y con la documentación del sistema. Además, aunque no sea obligatorio, se aplica el principio de \textbf{supervisión humana}: la IA solo recomienda y ninguna acción se ejecuta sin que una persona la revise.
+
+\filbreak   % si el resumen no cabe entero, pasa completo a la página siguiente
 \section{Resumen}
-\guia{Tabla resumen: norma, si es obligatoria y motivo.}
+
+La Tabla~\ref{tab:normativa} resume qué normas afectan a Oleosierra, si son obligatorias y por qué.
+
+\begin{table}[H]
+  \centering
+  \caption{Resumen del marco normativo aplicable a Oleosierra}
+  \label{tab:normativa}
+  \small
+  \estilotabla
+  \begin{tabularx}{\linewidth}{Q V Z}
+    \reglasup
+    \rowcolor{cabecera}
+    \cab{Norma} & \cab{¿Obligatoria?} & \cab{Motivo} \\
+    \rowcolor{filaalterna}
+    \textbf{RGPD y LOPDGDD} & Sí & Trata datos de socios, plantilla y clientes \\
+    \textbf{NIS2} & Sí, cuando España la transponga & Sector alimentario y mediana empresa: entidad importante \\
+    \rowcolor{filaalterna}
+    \textbf{ISO/IEC 27001} & No (voluntaria) & El SOC cumple controles del anexo~A y facilita la certificación \\
+    \textbf{Reglamento de IA} & Sí, con obligaciones limitadas & Despliega un sistema de IA que no es de alto riesgo \\
+    \reglainf
+  \end{tabularx}
+\end{table}
 
 % ============================ 4 =====================================
 \chapter{Conclusiones}
@@ -781,12 +850,18 @@ La API pública de VirusTotal limita las consultas a 4 por minuto y 500 al día,
 \chapter{Referencias bibliográficas}
 
 \begin{list}{}{\leftmargin=1.27cm \itemindent=-1.27cm \itemsep=6pt}
+  \item Directiva (UE) 2022/2555 del Parlamento Europeo y del Consejo, de 14 de diciembre de 2022, relativa a las medidas destinadas a garantizar un elevado nivel común de ciberseguridad en toda la Unión (Directiva SRI 2). (2022). \textit{Diario Oficial de la Unión Europea}, L 333, 80--152. \url{https://eur-lex.europa.eu/eli/dir/2022/2555/oj}
   \item European Union Agency for Cybersecurity. (2025). \textit{ENISA threat landscape 2025}. \url{https://www.enisa.europa.eu/publications/enisa-threat-landscape-2025}
+  \item International Organization for Standardization. (2022). \textit{Information security, cybersecurity and privacy protection --- Information security management systems --- Requirements} (Norma ISO/IEC 27001:2022). \url{https://www.iso.org/standard/27001}
+  \item Ley Orgánica 3/2018, de 5 de diciembre, de Protección de Datos Personales y garantía de los derechos digitales. (2018). \textit{Boletín Oficial del Estado}, 294. \url{https://www.boe.es/eli/es/lo/2018/12/05/3}
   \item Microsoft. (s.~f.). \textit{Sysmon}. Microsoft Learn. \url{https://learn.microsoft.com/es-es/sysinternals/downloads/sysmon}
   \item MITRE Corporation. (s.~f.). \textit{MITRE ATT\&CK}. \url{https://attack.mitre.org}
   \item OPNsense. (s.~f.). \textit{OPNsense documentation: Intrusion prevention system}. \url{https://docs.opnsense.org}
   \item Proofpoint. (s.~f.). \textit{Emerging Threats Open ruleset}. \url{https://rules.emergingthreats.net}
   \item Proxmox Server Solutions. (s.~f.). \textit{Proxmox VE administration guide}. \url{https://pve.proxmox.com/pve-docs/}
+  \item Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo, de 27 de abril de 2016, relativo a la protección de las personas físicas en lo que respecta al tratamiento de datos personales y a la libre circulación de estos datos. (2016). \textit{Diario Oficial de la Unión Europea}, L 119, 1--88. \url{https://eur-lex.europa.eu/eli/reg/2016/679/oj}
+  \item Reglamento (UE) 2024/1689 del Parlamento Europeo y del Consejo, de 13 de junio de 2024, por el que se establecen normas armonizadas en materia de inteligencia artificial (Reglamento de Inteligencia Artificial). (2024). \textit{Diario Oficial de la Unión Europea}. \url{https://eur-lex.europa.eu/eli/reg/2024/1689/oj}
+  \item Reglamento (UE) 2026/1744 del Parlamento Europeo y del Consejo, por el que se modifica el Reglamento (UE) 2024/1689 en lo que respecta a la simplificación de la aplicación de las normas armonizadas en materia de inteligencia artificial (ómnibus digital sobre IA). (2026). \textit{Diario Oficial de la Unión Europea}. \url{https://eur-lex.europa.eu/eli/reg/2026/1744/oj}
   \item VirusTotal. (s.~f.). \textit{VirusTotal API v3 reference}. \url{https://docs.virustotal.com}
   \item Wazuh. (s.~f.). \textit{Wazuh documentation: Deployment on Docker, VirusTotal integration and Sysmon monitoring}. \url{https://documentation.wazuh.com/current/}
 \end{list}

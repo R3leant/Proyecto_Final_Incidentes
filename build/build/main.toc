@@ -45,21 +45,21 @@
 \contentsline {section}{\numberline {2.9}Estimación del coste de implantación}{15}{section.2.9}%
 \contentsline {chapter}{\numberline {3}Marco normativo aplicable}{16}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Protección de datos: RGPD y LOPDGDD}{16}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Directiva NIS2}{16}{section.3.2}%
-\contentsline {section}{\numberline {3.3}ISO/IEC 27001:2022}{16}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Reglamento de Inteligencia Artificial}{16}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Resumen}{16}{section.3.5}%
-\contentsline {chapter}{\numberline {4}Conclusiones}{17}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Resultados obtenidos}{17}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Limitaciones}{17}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Líneas de mejora}{17}{section.4.3}%
-\contentsline {chapter}{Declaración de uso de IA generativa}{18}{chapter*.13}%
-\contentsline {chapter}{\numberline {5}Referencias bibliográficas}{19}{chapter.5}%
-\contentsline {chapter}{\numberline {A}Capturas y evidencias del laboratorio}{20}{appendix.Alph1}%
-\contentsline {chapter}{\numberline {B}Ficheros de configuración}{21}{appendix.Alph2}%
-\contentsline {chapter}{\numberline {C}Informes de los incidentes simulados}{22}{appendix.Alph3}%
-\contentsline {chapter}{\numberline {D}Playbooks en formato visual}{23}{appendix.Alph4}%
-\contentsline {chapter}{\numberline {E}Materiales de concienciación}{24}{appendix.Alph5}%
-\contentsline {chapter}{\numberline {F}Plantillas de notificación}{25}{appendix.Alph6}%
-\contentsline {chapter}{\numberline {G}Relación con los resultados de aprendizaje}{26}{appendix.Alph7}%
+\contentsline {section}{\numberline {3.2}Directiva NIS2}{17}{section.3.2}%
+\contentsline {section}{\numberline {3.3}ISO/IEC 27001:2022}{18}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Reglamento de Inteligencia Artificial}{18}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Resumen}{19}{section.3.5}%
+\contentsline {chapter}{\numberline {4}Conclusiones}{20}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Resultados obtenidos}{20}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Limitaciones}{20}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Líneas de mejora}{20}{section.4.3}%
+\contentsline {chapter}{Declaración de uso de IA generativa}{21}{chapter*.14}%
+\contentsline {chapter}{\numberline {5}Referencias bibliográficas}{22}{chapter.5}%
+\contentsline {chapter}{\numberline {A}Capturas y evidencias del laboratorio}{24}{appendix.Alph1}%
+\contentsline {chapter}{\numberline {B}Ficheros de configuración}{25}{appendix.Alph2}%
+\contentsline {chapter}{\numberline {C}Informes de los incidentes simulados}{26}{appendix.Alph3}%
+\contentsline {chapter}{\numberline {D}Playbooks en formato visual}{27}{appendix.Alph4}%
+\contentsline {chapter}{\numberline {E}Materiales de concienciación}{28}{appendix.Alph5}%
+\contentsline {chapter}{\numberline {F}Plantillas de notificación}{29}{appendix.Alph6}%
+\contentsline {chapter}{\numberline {G}Relación con los resultados de aprendizaje}{30}{appendix.Alph7}%
 \contentsfinish 
